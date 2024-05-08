@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct FullScreenPlayer: View {
+    var publicProperties: PublicAudioImageProperties
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Is full screen")
+            
+        //        .edgesIgnoringSafeArea(.all)
     }
 }
 
 #Preview {
-    FullScreenPlayer()
+    @State var publicProperties = PublicAudioImageProperties.shared
+
+    return FullScreenPlayer(publicProperties: publicProperties)
 }

@@ -10,14 +10,14 @@ import PhotosUI
 import SwiftUI
 import SwiftData
 
-@Model
-class PickedImageSampleData {
-    var pickedItem: PhotosPickerItem
-    init(picked: PhotosPickerItem) {
-        self.pickedItem = picked
-    }
-    
-}
+//@Model
+//class PickedImageSampleData {
+//    var pickedItem: PhotosPickerItem
+//    init(picked: PhotosPickerItem) {
+//        self.pickedItem = picked
+//    }
+//    
+//}
 
 
 

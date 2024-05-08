@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct InToolbarAfterSelection: View {
+    @ObservedObject var viewModel: VoicedImageModel
+    var publicProperties: PublicAudioImageProperties
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//        let _ = print("toolbar")
+        HStack {
+            if publicProperties.audioFileSelectedAndAdded {
+                AddAudioButton(publicProperties: publicProperties, toolbar: true)
+            }
+            AddNewImage(viewModel: viewModel, inToolbar: true)
+        }
     }
 }
 
 #Preview {
-    InToolbarAfterSelection()
+    let voicedImageModel = VoicedImageModel()
+    @State var publicProperties = PublicAudioImageProperties.shared
+    return InToolbarAfterSelection(viewModel: voicedImageModel, publicProperties: publicProperties)
 }

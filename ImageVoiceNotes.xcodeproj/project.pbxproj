@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80DD3072BD9537800A4C38A /* VoicedImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD3062BD9537800A4C38A /* VoicedImageModel.swift */; };
+		B826E0BF2BE9C8E1006273D3 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */; };
+		B85FFFA02BDE1C0100D95954 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */; };
+		B85FFFA72BDFDAE200D95954 /* PublicAudioImageProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85FFFA62BDFDAE200D95954 /* PublicAudioImageProperties.swift */; };
+		B86812722BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86812712BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift */; };
+		B86812742BE5110B00AA36F6 /* InToolbarAfterSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86812732BE5110B00AA36F6 /* InToolbarAfterSelection.swift */; };
+		B86812762BE52BF500AA36F6 /* AddAudioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86812752BE52BF500AA36F6 /* AddAudioButton.swift */; };
+		B86812782BE540D500AA36F6 /* AudioImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86812772BE540D500AA36F6 /* AudioImageModel.swift */; };
 		B86C6E532BC9672500B5F991 /* ImageVoiceNotesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E522BC9672500B5F991 /* ImageVoiceNotesApp.swift */; };
 		B86C6E552BC9672500B5F991 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E542BC9672500B5F991 /* ContentView.swift */; };
 		B86C6E572BC9672500B5F991 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E562BC9672500B5F991 /* Item.swift */; };
@@ -15,6 +23,11 @@
 		B86C6E662BC9672600B5F991 /* ImageVoiceNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E652BC9672600B5F991 /* ImageVoiceNotesTests.swift */; };
 		B86C6E702BC9672600B5F991 /* ImageVoiceNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E6F2BC9672600B5F991 /* ImageVoiceNotesUITests.swift */; };
 		B86C6E722BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E712BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift */; };
+		B86DBE912BDAB6E800C25322 /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86DBE902BDAB6E800C25322 /* ImageViewer.swift */; };
+		B8700A452BDB99880055BC38 /* AddNewAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8700A442BDB99880055BC38 /* AddNewAudio.swift */; };
+		B8783EE82BD636A200F9FE55 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783EE72BD636A200F9FE55 /* BaseView.swift */; };
+		B87B39B72BD8FD310070566E /* AddNewImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87B39B62BD8FD310070566E /* AddNewImage.swift */; };
+		B8A7F0F72BE6760600FD1A85 /* SampleModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +48,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B80DD3062BD9537800A4C38A /* VoicedImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicedImageModel.swift; sourceTree = "<group>"; };
+		B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		B8559EE72BD679F4000A48E0 /* ImageVoiceNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImageVoiceNotes.entitlements; sourceTree = "<group>"; };
+		B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
+		B85FFFA62BDFDAE200D95954 /* PublicAudioImageProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAudioImageProperties.swift; sourceTree = "<group>"; };
+		B86812712BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPlayerButtonAndScreen.swift; sourceTree = "<group>"; };
+		B86812732BE5110B00AA36F6 /* InToolbarAfterSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InToolbarAfterSelection.swift; sourceTree = "<group>"; };
+		B86812752BE52BF500AA36F6 /* AddAudioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAudioButton.swift; sourceTree = "<group>"; };
+		B86812772BE540D500AA36F6 /* AudioImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioImageModel.swift; sourceTree = "<group>"; };
 		B86C6E4F2BC9672500B5F991 /* ImageVoiceNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageVoiceNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86C6E522BC9672500B5F991 /* ImageVoiceNotesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVoiceNotesApp.swift; sourceTree = "<group>"; };
 		B86C6E542BC9672500B5F991 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +68,12 @@
 		B86C6E6B2BC9672600B5F991 /* ImageVoiceNotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageVoiceNotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B86C6E6F2BC9672600B5F991 /* ImageVoiceNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVoiceNotesUITests.swift; sourceTree = "<group>"; };
 		B86C6E712BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVoiceNotesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B86DBE902BDAB6E800C25322 /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
+		B8700A442BDB99880055BC38 /* AddNewAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAudio.swift; sourceTree = "<group>"; };
+		B8783EE72BD636A200F9FE55 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		B8783EE92BD64CD200F9FE55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B87B39B62BD8FD310070566E /* AddNewImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewImage.swift; sourceTree = "<group>"; };
+		B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SampleModelContainer.swift; path = ../SampleModelContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,9 +101,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B826E0B92BE79910006273D3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B86812772BE540D500AA36F6 /* AudioImageModel.swift */,
+				B80DD3062BD9537800A4C38A /* VoicedImageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B85FFFA52BDFB69200D95954 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
 		B86C6E462BC9672500B5F991 = {
 			isa = PBXGroup;
 			children = (
+				B86812732BE5110B00AA36F6 /* InToolbarAfterSelection.swift */,
 				B86C6E512BC9672500B5F991 /* ImageVoiceNotes */,
 				B86C6E642BC9672600B5F991 /* ImageVoiceNotesTests */,
 				B86C6E6E2BC9672600B5F991 /* ImageVoiceNotesUITests */,
@@ -96,8 +142,21 @@
 		B86C6E512BC9672500B5F991 /* ImageVoiceNotes */ = {
 			isa = PBXGroup;
 			children = (
+				B826E0B92BE79910006273D3 /* Models */,
+				B85FFFA52BDFB69200D95954 /* SwiftData */,
+				B8559EE72BD679F4000A48E0 /* ImageVoiceNotes.entitlements */,
+				B8783EE92BD64CD200F9FE55 /* Info.plist */,
 				B86C6E522BC9672500B5F991 /* ImageVoiceNotesApp.swift */,
 				B86C6E542BC9672500B5F991 /* ContentView.swift */,
+				B8783EE72BD636A200F9FE55 /* BaseView.swift */,
+				B86DBE902BDAB6E800C25322 /* ImageViewer.swift */,
+				B86812712BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift */,
+				B87B39B62BD8FD310070566E /* AddNewImage.swift */,
+				B8700A442BDB99880055BC38 /* AddNewAudio.swift */,
+				B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */,
+				B86812752BE52BF500AA36F6 /* AddAudioButton.swift */,
+				B85FFFA62BDFDAE200D95954 /* PublicAudioImageProperties.swift */,
+				B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */,
 				B86C6E562BC9672500B5F991 /* Item.swift */,
 				B86C6E582BC9672600B5F991 /* Assets.xcassets */,
 				B86C6E5A2BC9672600B5F991 /* Preview Content */,
@@ -261,8 +320,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				B86C6E552BC9672500B5F991 /* ContentView.swift in Sources */,
+				B8700A452BDB99880055BC38 /* AddNewAudio.swift in Sources */,
+				B86812762BE52BF500AA36F6 /* AddAudioButton.swift in Sources */,
+				B80DD3072BD9537800A4C38A /* VoicedImageModel.swift in Sources */,
+				B86812742BE5110B00AA36F6 /* InToolbarAfterSelection.swift in Sources */,
+				B86812782BE540D500AA36F6 /* AudioImageModel.swift in Sources */,
+				B87B39B72BD8FD310070566E /* AddNewImage.swift in Sources */,
+				B86812722BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift in Sources */,
+				B85FFFA02BDE1C0100D95954 /* PlayPauseButton.swift in Sources */,
+				B826E0BF2BE9C8E1006273D3 /* AudioPlayer.swift in Sources */,
 				B86C6E572BC9672500B5F991 /* Item.swift in Sources */,
+				B8A7F0F72BE6760600FD1A85 /* SampleModelContainer.swift in Sources */,
+				B85FFFA72BDFDAE200D95954 /* PublicAudioImageProperties.swift in Sources */,
 				B86C6E532BC9672500B5F991 /* ImageVoiceNotesApp.swift in Sources */,
+				B8783EE82BD636A200F9FE55 /* BaseView.swift in Sources */,
+				B86DBE912BDAB6E800C25322 /* ImageViewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,16 +495,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ImageVoiceNotes/ImageVoiceNotes.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ImageVoiceNotes/Preview Content\"";
+				DEVELOPMENT_TEAM = YA55N5F8WU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImageVoiceNotes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,6 +517,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeevanjotsinghvital.ImageVoiceNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -451,16 +529,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ImageVoiceNotes/ImageVoiceNotes.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ImageVoiceNotes/Preview Content\"";
+				DEVELOPMENT_TEAM = YA55N5F8WU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImageVoiceNotes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,6 +551,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeevanjotsinghvital.ImageVoiceNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

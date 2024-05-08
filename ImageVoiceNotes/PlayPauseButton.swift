@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct PlayPauseButton: View {
+    var isPlaying: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(systemName: isPlaying ? "pause" : "play")
+            .frame(width: 50, height: 50)
+            .font(.system(size: 30))
+            .background(.black)
+            .foregroundColor(.white)
+            .clipShape(.rect(cornerRadius: 20))
     }
 }
 
 #Preview {
-    PlayPauseButton()
+    PlayPauseButton(isPlaying: false)
 }
