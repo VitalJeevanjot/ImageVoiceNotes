@@ -10,6 +10,8 @@ import SwiftUI
 struct ImageViewer: View {
     @StateObject private var voicedImageModel = VoicedImageModel()
     @State private var publicProperties = PublicAudioImageProperties.shared
+    
+    @Environment (\.dismiss) private var dismiss
     var demo: Bool
     
     init(diemo: Bool = false) {
@@ -50,6 +52,15 @@ struct ImageViewer: View {
             }
 
             
+        }
+        .toolbar {
+            ToolbarItem {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark.bin.fill")
+                }
+            }
         }
 
     }

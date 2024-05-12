@@ -51,13 +51,13 @@ struct AddNewAudio: View {
         }
         .onDisappear(perform: {
             print("disappeared....")
-            publicProperties.timer?.invalidate()
             publicProperties.audioPlayer.stop()
             publicProperties.isPlaying = false
             publicProperties.audioFileSelectedAndAdded = false
             publicProperties.isReadyToPlayFull = false
         })
     }
+    
 }
 //extension View
 

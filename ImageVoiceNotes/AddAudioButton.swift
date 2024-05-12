@@ -39,13 +39,23 @@ struct AddAudioButton: View {
         .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.audio]) { result in
             switch result {
             case .success(let file):
+                updateUIAfterAudioSelect()
                 Task {
-                    updateUIAfterAudioSelect()
                     presentFilePicker = false
+//                    print(file.pa)
                     guard file.startAccessingSecurityScopedResource() else {
                         return
                     }
-                    
+                    print("File exists/")
+                    print(FileManager.default.fileExists(atPath: URL(filePath: file.absoluteString).path()))
+                    print(FileManager.default.fileExists(atPath: file.absoluteString))
+                    let url = URL.init(string: file.absoluteString)
+                    print(FileManager.default.fileExists(atPath: url!.path()))
+                    print(URL(fileURLWithPath: file.absoluteString).path())
+                    print(file.absoluteString)
+                    print(file.absoluteURL)
+                    print(file.absoluteURL.path())
+                    print("\\File exists")
                     assignAudioPlayer(val: file)
                 }
                 
@@ -59,6 +69,7 @@ struct AddAudioButton: View {
     func updateUIAfterAudioSelect() {
         publicProperties.isLoading = true
         publicProperties.audioFileSelectedAndAdded = true
+//        presentFilePicker = false
     }
     
     
@@ -83,7 +94,6 @@ struct AddAudioButton: View {
         } catch {
             //            print("2.5")
             //            print(error)
-            publicProperties.timer?.invalidate()
             publicProperties.isPlaying = false
             publicProperties.audioFileSelectedAndAdded = false
             publicProperties.isReadyToPlayFull = false

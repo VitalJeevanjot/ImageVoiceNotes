@@ -15,7 +15,7 @@ import SwiftData
 class AudioImageModel {
     var pickedItem: Data
     var audioPicked: Data
-    init(pickedItem: PhotosPickerItem, audio: AVAudioPlayer) {
+    init(pickedItem: Image, audio: AVAudioPlayer) {
         do {
             self.pickedItem = try Data(from: pickedItem as! Decoder)
         } catch {
