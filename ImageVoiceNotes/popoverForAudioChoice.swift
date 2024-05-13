@@ -1,0 +1,58 @@
+//
+//  popoverForAudioChoice.swift
+//  ImageVoiceNotes
+//
+//  Created by Jeevanjot Singh on 13/05/24.
+//
+
+import SwiftUI
+
+struct popoverForAudioChoice: View {
+    @State private var isShowingPopover = false
+    var body: some View {
+        HStack {
+            VStack {
+                Button {
+                    print("Add")
+                } label: {
+                    Image(systemName: "waveform.badge.plus")
+                        .font(.system(size: 50))
+                        .padding(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 15))
+                        .symbolRenderingMode(.monochrome)
+                        .background(Color.black)
+                        .clipShape(.rect(cornerRadius: 10))
+                        .foregroundStyle(.white)
+                }
+                Text("Record")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+            }
+            .padding()
+            
+            VStack {
+                Button {
+                    print("Record")
+                } label: {
+                    Image(systemName: "record.circle")
+                        .font(.system(size: 50))
+                        .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                        .symbolRenderingMode(.monochrome)
+                        .background(Color.black)
+                        .clipShape(.rect(cornerRadius: 10))
+                        .foregroundStyle(.red)
+                }
+                
+                Text("Record")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+            }
+            .padding()
+            
+        }
+        
+    }
+}
+
+#Preview {
+    popoverForAudioChoice()
+}
