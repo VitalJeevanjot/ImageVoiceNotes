@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct popoverForAudioChoice: View {
-    @State private var isShowingPopover = false
+    @Binding var presentFilePicker: Bool
+    @Binding var presentPopOver: Bool
+    
     var body: some View {
         HStack {
             VStack {
                 Button {
-                    print("Add")
+                    presentPopOver = false
+                    presentFilePicker = true
+                    print("true now")
                 } label: {
                     Image(systemName: "waveform.badge.plus")
                         .font(.system(size: 50))
@@ -54,5 +58,8 @@ struct popoverForAudioChoice: View {
 }
 
 #Preview {
-    popoverForAudioChoice()
+    @State var filePicker = false
+    @State var popOver = false
+    
+    return popoverForAudioChoice(presentFilePicker: $filePicker, presentPopOver: $popOver)
 }

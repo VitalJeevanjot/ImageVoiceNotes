@@ -116,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */,
-				B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -149,6 +148,7 @@
 				B85FFFA52BDFB69200D95954 /* SwiftData */,
 				B8559EE72BD679F4000A48E0 /* ImageVoiceNotes.entitlements */,
 				B8783EE92BD64CD200F9FE55 /* Info.plist */,
+				B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */,
 				B86C6E522BC9672500B5F991 /* ImageVoiceNotesApp.swift */,
 				B86C6E542BC9672500B5F991 /* ContentView.swift */,
 				B8783EE72BD636A200F9FE55 /* BaseView.swift */,

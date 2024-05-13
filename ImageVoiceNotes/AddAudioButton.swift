@@ -10,13 +10,14 @@ import AVFAudio
 
 struct AddAudioButton: View {
     @State private var presentFilePicker = false
+    @State private var presentPopOver = false
     var publicProperties: PublicAudioImageProperties
     var toolbar = false
     
     
     var body: some View {
         Button {
-            presentFilePicker = true
+            presentPopOver = true
         } label: {
             Image(systemName: "waveform.badge.plus")
                 .symbolRenderingMode(.monochrome)
@@ -33,8 +34,9 @@ struct AddAudioButton: View {
                 .background(Color.black)
                 .clipShape(.rect(cornerRadius: 10))
                 .foregroundStyle(.white)
-            
-            
+        }
+        .popover(isPresented: $presentPopOver) {
+            popoverForAudioChoice(presentFilePicker: $presentFilePicker, presentPopOver: $presentPopOver)
         }
         .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.audio]) { result in
             switch result {
