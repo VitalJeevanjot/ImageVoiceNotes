@@ -40,23 +40,26 @@ struct AddAudioButton: View {
             switch result {
             case .success(let file):
                 updateUIAfterAudioSelect()
+                presentFilePicker = false
+                guard file.startAccessingSecurityScopedResource() else {
+                    return
+                }
                 Task {
-                    presentFilePicker = false
 //                    print(file.pa)
-                    guard file.startAccessingSecurityScopedResource() else {
-                        return
-                    }
-                    print("File exists/")
-                    print(FileManager.default.fileExists(atPath: URL(filePath: file.absoluteString).path()))
-                    print(FileManager.default.fileExists(atPath: file.absoluteString))
-                    let url = URL.init(string: file.absoluteString)
-                    print(FileManager.default.fileExists(atPath: url!.path()))
-                    print(URL(fileURLWithPath: file.absoluteString).path())
-                    print(file.absoluteString)
-                    print(file.absoluteURL)
-                    print(file.absoluteURL.path())
-                    print("\\File exists")
-                    assignAudioPlayer(val: file)
+                    await assignAudioPlayer(val: file)
+
+//                    print("File exists/")
+//                    print(FileManager.default.fileExists(atPath: URL(filePath: file.absoluteString).path))
+//                    print(FileManager.default.fileExists(atPath: file.absoluteString))
+//                    let url = URL.init(string: file.absoluteString)
+//                    print(FileManager.default.fileExists(atPath: url!.path()))
+//                    print(FileManager.default.fileExists(atPath: file.absoluteURL.path))
+//                    print(URL(fileURLWithPath: file.absoluteString).path())
+//                    print(file.absoluteString)
+//                    print(file.absoluteURL)
+//                    print(file.absoluteURL.path())
+//                    print(file.absoluteURL.path)
+//                    print("\\File exists")
                 }
                 
             case .failure(let err):
@@ -73,33 +76,60 @@ struct AddAudioButton: View {
     }
     
     
-    func assignAudioPlayer(val: URL) {
+    func assignAudioPlayer(val: URL) async {
         
         defer {
             val.stopAccessingSecurityScopedResource()
+//            publicProperties.selectedFilePathForAudio?.stopAccessingSecurityScopedResource()
         }
         
+        print("Something---------")
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        print("Something---------end")
         
-        print("1")
+//        publicProperties.selectedFilePathForAudio = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(UUID().uuidString, conformingTo: .mp3)
         
+//        guard publicProperties.selectedFilePathForAudio?.startAccessingSecurityScopedResource() != nil else {
+//            print("Cannot access filepath for audi--------")
+//            return
+//        }
         do {
-            publicProperties.audioPlayer =  try AVAudioPlayer(contentsOf: val)
+            
+            publicProperties.pickedAudioData = try Data(contentsOf: val)
+//            print("Path is:::::")
+//            print(publicProperties.selectedFilePathForAudio)
+//            try FileManager.default.copyItem(at: val, to: publicProperties.selectedFilePathForAudio!)
+//            if {
+//
+//            }
+//            print(":::::::::::Path is:::::")
+//            print(publicProperties.selectedFilePathForAudio)
+            
+        } catch {
+            print("err when saving data temporarily is: \(error)")
+        }
+
+        do {
+            publicProperties.audioPlayer =  try AVAudioPlayer(data: publicProperties.pickedAudioData)
             //            print("2")
-            publicProperties.durationTime = publicProperties.audioPlayer.duration
-            publicProperties.setUpTimer()
-            //            print(
-            publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
-            publicProperties.isReadyToPlayFull = true
-            publicProperties.isLoading = false
+         
         } catch {
             //            print("2.5")
-            //            print(error)
+            print(error)
             publicProperties.isPlaying = false
             publicProperties.audioFileSelectedAndAdded = false
             publicProperties.isReadyToPlayFull = false
             publicProperties.isLoading = false
             
         }
+        
+        publicProperties.durationTime = publicProperties.audioPlayer.duration
+        
+        publicProperties.setUpTimer()
+        //            print(
+        publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+        publicProperties.isReadyToPlayFull = true
+        publicProperties.isLoading = false
     }
     
 }

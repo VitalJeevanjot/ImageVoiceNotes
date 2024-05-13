@@ -21,9 +21,12 @@ import PhotosUI
         }
     }
     
+    
     @Published var pickedItemIdentifier: String = ""
     
     @Published var imageStatus: Status?
+    
+    var pickedImageData = Data()
         
     enum Status {
         case loading
@@ -53,8 +56,12 @@ import PhotosUI
         imageStatus = .loading
         
         do {
-            if let data = try await pickedItem?.loadTransferable(type: Data.self), let uiImage = UIImage(data: data) {
-                imageStatus = .finished(Image(uiImage: uiImage))
+            if let data = try await pickedItem?.loadTransferable(type: Data.self)
+            {
+                self.pickedImageData = data
+                if let uiImage = UIImage(data: self.pickedImageData) {
+                    imageStatus = .finished(Image(uiImage: uiImage))
+                }
             } else {
                 throw LoadingError.contentTypeNotSupportedForTheApp
             }

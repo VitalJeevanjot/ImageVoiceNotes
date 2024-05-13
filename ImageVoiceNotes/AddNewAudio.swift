@@ -42,6 +42,9 @@ struct AddNewAudio: View {
                     ProgressView()
                         .padding()
                         .scaleEffect(CGSize(width: 2.0, height: 2.0))
+                    Text("Processing file.")
+                        .font(.caption)
+                        .fontWeight(.bold)
                     
                 }
                 
@@ -69,6 +72,7 @@ struct AddNewAudio: View {
 #Preview ("2nd Add new Audio") {
     @State var publicProperties = PublicAudioImageProperties.shared
     publicProperties.durationTime = 10
+    publicProperties.isLoading = true
     return AddNewAudio(publicProperties: publicProperties)
 }
 

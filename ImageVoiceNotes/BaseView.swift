@@ -44,25 +44,33 @@ struct BaseView: View {
     
     func loadAudio() {
         print("calling load audio")
-        let url = URL(fileURLWithPath: "/private/var/mobile/Containers/Shared/AppGroup/5CEF82B9-17AB-48D4-95FF-3C6339BB136C/File Provider Storage/Shared/Ranjit Pura 4.m4a") 
-        print(url.path())
-        print(FileManager.default.fileExists(atPath: url.path()))
-        
-        defer {
-            url.stopAccessingSecurityScopedResource()
-        }
-        
-        print("the value is")
-        let val = url.startAccessingSecurityScopedResource()
-        print(val)
-        print("val")
+        let fg = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         do {
-            let ad = try AVAudioPlayer(contentsOf: url)
-            print("File loaded.....")
-            print(ad.duration)
-        } catch {
-            print("err is: \(error)")
+            let filesURLs = try  FileManager.default.contentsOfDirectory(at: fg, includingPropertiesForKeys: [])
+            print(filesURLs)
         }
+        catch {
+            print("\(error)")
+        }
+//        let url = URL(fileURLWithPath: "/private/var/mobile/Containers/Shared/AppGroup/5CEF82B9-17AB-48D4-95FF-3C6339BB136C/File Provider Storage/Shared/Ranjit Pura 4.m4a")
+//        print(url.path())
+//        print(FileManager.default.fileExists(atPath: url.path()))
+        
+//        defer {
+//            url.stopAccessingSecurityScopedResource()
+//        }
+//        
+//        print("the value is")
+//        let val = url.startAccessingSecurityScopedResource()
+//        print(val)
+//        print("val")
+//        do {
+//            let ad = try AVAudioPlayer(contentsOf: url)
+//            print("File loaded.....")
+//            print(ad.duration)
+//        } catch {
+//            print("err is: \(error)")
+//        }
     }
     
 }

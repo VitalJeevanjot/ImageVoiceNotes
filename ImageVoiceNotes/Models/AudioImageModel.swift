@@ -13,18 +13,42 @@ import SwiftData
 
 @Model
 class AudioImageModel {
-    var pickedItem: Data
-    var audioPicked: Data
-    init(pickedItem: Image, audio: AVAudioPlayer) {
-        do {
-            self.pickedItem = try Data(from: pickedItem as! Decoder)
-        } catch {
-            fatalError("Unable to Load Audio \(error)")
-        }
-        do {
-            self.audioPicked = try Data(from: audio as! Decoder)
-        } catch {
-            fatalError("Unable to Load Audio \(error)")
-        }
+    var nameOfObject: String
+    var imagePicked: String
+    var audioPicked: String
+    var createdDate: Date
+    var importedDate: Date
+    
+    init(nameOfObject: String, imagePicked: String, audioPicked: String, createdDate: Date, importedDate: Date) {
+        self.nameOfObject = nameOfObject
+        self.imagePicked = imagePicked
+        self.audioPicked = audioPicked
+        self.createdDate = createdDate
+        self.importedDate = importedDate
     }
+    
+//    init(nameOfObject: String, imagePicked: String, audioPicked: String, createdDate: Date) {
+//        self.nameOfObject = nameOfObject
+//        self.imagePicked = imagePicked
+//        self.audioPicked = audioPicked
+//        self.createdDate = createdDate
+//    }
+//    init(nameOfObject: String, imagePicked: String, audioPicked: String) {
+//        self.nameOfObject = nameOfObject
+//        self.imagePicked = imagePicked
+//        self.audioPicked = audioPicked
+//    }
+    
+//    init(nameOfObject: String, imagePicked: String, audioPicked: String, createdDate: Date, importedDate: Date) {
+//        self.nameOfObject = nameOfObject
+//        self.imagePicked = imagePicked
+//        self.audioPicked = audioPicked
+//        self.createdDate = createdDate
+//        self.importedDate = importedDate
+//    }
+    
+//    init(nameOfObject: String, imagePicked: String) {
+//        self.nameOfObject = nameOfObject
+//        self.imagePicked = imagePicked
+//    }
 }

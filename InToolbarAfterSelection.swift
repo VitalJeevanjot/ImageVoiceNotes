@@ -18,6 +18,20 @@ struct InToolbarAfterSelection: View {
                 AddAudioButton(publicProperties: publicProperties, toolbar: true)
             }
             AddNewImage(viewModel: viewModel, inToolbar: true)
+            
+            if publicProperties.isReadyToPlayFull {
+                Button {
+                    print("full")
+                } label: {
+                    Label("Save", systemImage: "checkmark.square.fill")
+                        .labelStyle(.iconOnly)
+                        .foregroundStyle(.brown)
+                        .font(.title)
+                    
+                }
+                
+            }
+            
         }
     }
 }
@@ -25,5 +39,18 @@ struct InToolbarAfterSelection: View {
 #Preview {
     let voicedImageModel = VoicedImageModel()
     @State var publicProperties = PublicAudioImageProperties.shared
-    return InToolbarAfterSelection(viewModel: voicedImageModel, publicProperties: publicProperties)
+    return NavigationStack {
+        InToolbarAfterSelection(viewModel: voicedImageModel, publicProperties: publicProperties)
+    }
+}
+
+#Preview("Save button") {
+    
+    let voicedImageModel = VoicedImageModel()
+    @State var publicProperties = PublicAudioImageProperties.shared
+    publicProperties.isReadyToPlayFull = true
+    publicProperties.audioFileSelectedAndAdded = true
+    return NavigationStack {
+        InToolbarAfterSelection(viewModel: voicedImageModel, publicProperties: publicProperties)
+    }
 }

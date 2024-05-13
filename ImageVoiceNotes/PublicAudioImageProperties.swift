@@ -27,8 +27,13 @@ import AVFAudio
     
     var showOnFullScreenAudioPlayer = true
     
+    var selectedFilePathForImage = URL(string: "")
+    var selectedFilePathForAudio = URL(string: "")
+    
     @ObservationIgnored var audioPlayer = AVAudioPlayer()
-
+    
+    @ObservationIgnored var pickedAudioData = Data()
+    
     func setUpTimer() {
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { Timer in
             print("1/2 seconds passed")
