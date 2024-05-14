@@ -1,5 +1,5 @@
 //
-//  VoicedImageModel.swift
+//  ImageProperties.swift
 //  ImageVoiceNotes
 //
 //  Created by Jeevanjot Singh on 24/04/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-@MainActor final class VoicedImageModel: ObservableObject {
+@MainActor final class ImageProperties: ObservableObject {
 
     @Published var pickedItem = Optional(PhotosPickerItem(itemIdentifier: "")) {
         didSet {
