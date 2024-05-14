@@ -11,10 +11,10 @@ import AVFAudio
 struct AudioRecorder: View {
     @State private var publicProperties = PublicAudioImageProperties.shared
     
-    @State private var audioRecording = AVAudioRecorder()
+    @State private var audioRecording: AVAudioRecorder?
     let componentFormatter = DateComponentsFormatter()
     
-    @State private var recordingStarted = true
+    @State private var isRecording = false
     @State private var canRecord = false
     @State private var isPaused = true
     @State private var currentTime = TimeInterval(0)
@@ -27,13 +27,14 @@ struct AudioRecorder: View {
         
         
         return VStack {
+            
             if canRecord {
                 Text("\(componentFormatter.string(from: currentTime) ?? "00:00")")
                     .padding()
                 
                 HStack {
                     Button {
-                        print("Record/Pause")
+                        startPauseRecording()
                     } label: {
                         Label("Record or Pause", systemImage: isPaused ? "recordingtape.circle.fill" : "pause.rectangle.fill")
                             .font(.system(size: 50))
@@ -42,9 +43,9 @@ struct AudioRecorder: View {
                     }
                     
                     Group {
-                        if recordingStarted {
+                        if isRecording {
                             Button {
-                                print("Stop")
+                                stopRecording()
                             }label: {
                                 Label("Record or Pause", systemImage: "stop.circle.fill")
                                     .font(.system(size: 40))
@@ -69,8 +70,21 @@ struct AudioRecorder: View {
             }
         }
         .task {
-//            print("Running task")
+            let audioPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            
+            let fileName = audioPath.appendingPathComponent("temp.m4a")
+            
+            do {
+                if FileManager.default.fileExists(atPath: fileName.path()) {
+                    try FileManager.default.removeItem(at: fileName)
+                }
+            } catch {
+                print("error while delete audio file if exist: \(error)")
+            }
+            
             await checkForRecordingPermission()
+
+//            print("Running task")
 //            do {
 //                    try
 //                audioSession.setCategory(.playAndRecord, mode: .default)
@@ -91,13 +105,14 @@ struct AudioRecorder: View {
         }
         
     }
+    
     func checkForRecordingPermission() async {
         print("checking")
 //        print(AVAudioApplication.shared.recordPermission)
         if await AVAudioApplication.requestRecordPermission() {
             canRecord = true
             print("Preparing recording")
-//            prepareRecordingFile()
+            prepareRecordingFile()
         } else {
             print("false")
             canRecord = false
@@ -109,7 +124,8 @@ struct AudioRecorder: View {
         
         let audioPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
-        let fileName = audioPath.appendingPathComponent("sampleAudio.m4a")
+        let fileName = audioPath.appendingPathComponent("temp.m4a")
+        
         
 //        let x = NSError(domain: NSOSStatusErrorDomain, code:1718449215, userInfo: .none)
 //        print(x)
@@ -120,30 +136,57 @@ struct AudioRecorder: View {
         let settings : [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            AVNumberOfChannelsKey: 1
         ]
         print(fileName)
         do {
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
+//            try AVAudioSession.sharedInstance().setActive(true)
             audioRecording = try AVAudioRecorder(url: fileName, settings: settings)
+            audioRecording!.delegate = AudioRecorderDelegatee.shared            
+            print(try FileManager.default.contentsOfDirectory(atPath: audioPath.path()))
+            
             print("Prepared.")
         } catch {
             print("err on setup of recording is: \(error) and \(Date.now)")
         }
-        audioRecording.delegate = AudioRecorderDelegatee.shared
-        audioRecording.prepareToRecord()
         print("Prepared 2.")
     }
     
-    func startStopPauseRecording() {
-        audioRecording.record()
-        updateTiming()
+    func startPauseRecording() {
+        if isPaused {
+            print("Started.......")
+            print(audioRecording!.record())
+            print(".......Started.......")
+            isRecording = true
+            isPaused = false
+            print("Started recording")
+            updateTiming()
+        } else {
+            audioRecording!.pause()
+            isPaused = true
+        }
+    }
+    
+    func stopRecording() {
+        do {
+            audioRecording!.stop()
+//            try AVAudioSession.sharedInstance().setActive(false)
+        } catch {
+            print("Audio seesion cannot of deactivated err is: \(error)")
+        }
+        isPaused = true
+        isRecording = false
+        currentTime = TimeInterval(0)
+        // hide presentor, prepare the file, copy to data to publicproperties audioplayer, delete the file(also on dissapear check if file exists then delete it and recordingStarted = false)
     }
     
     func updateTiming() {
-        if recordingStarted {
-            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-                currentTime = audioRecording.currentTime
+        if isRecording && !isPaused {
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                currentTime = audioRecording!.currentTime
+                print("Updaing")
+                print(audioRecording!.currentTime)
                 updateTiming()
             }
         }
