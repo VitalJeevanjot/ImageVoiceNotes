@@ -23,7 +23,7 @@ struct AudioPlayer: View {
         return VStack {
             
             Group {
-                let _ = print("avplayer \(publicProperties.audioPlayer.duration)")
+//                let _ = print("avplayer \(publicProperties.audioPlayer.duration)")
                 HStack {
                     Slider(
                         value: $publicProperties.audioPlayer.currentTime,

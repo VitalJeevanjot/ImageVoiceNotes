@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B80DD3072BD9537800A4C38A /* VoicedImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD3062BD9537800A4C38A /* VoicedImageModel.swift */; };
+		B80DD3072BD9537800A4C38A /* ImageProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD3062BD9537800A4C38A /* ImageProperties.swift */; };
 		B826E0BF2BE9C8E1006273D3 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */; };
 		B82DD2702BF1A0850007F495 /* popoverForAudioChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */; };
+		B85895902BF232620072A42B /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B858958F2BF232620072A42B /* AudioRecorder.swift */; };
 		B85FFFA02BDE1C0100D95954 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */; };
 		B85FFFA72BDFDAE200D95954 /* PublicAudioImageProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85FFFA62BDFDAE200D95954 /* PublicAudioImageProperties.swift */; };
 		B86812722BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86812712BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift */; };
@@ -49,10 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B80DD3062BD9537800A4C38A /* VoicedImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoicedImageModel.swift; sourceTree = "<group>"; };
+		B80DD3062BD9537800A4C38A /* ImageProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProperties.swift; sourceTree = "<group>"; };
 		B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popoverForAudioChoice.swift; sourceTree = "<group>"; };
 		B8559EE72BD679F4000A48E0 /* ImageVoiceNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImageVoiceNotes.entitlements; sourceTree = "<group>"; };
+		B858958F2BF232620072A42B /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		B85FFFA62BDFDAE200D95954 /* PublicAudioImageProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAudioImageProperties.swift; sourceTree = "<group>"; };
 		B86812712BE3D4C100AA36F6 /* MainPlayerButtonAndScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPlayerButtonAndScreen.swift; sourceTree = "<group>"; };
@@ -107,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				B86812772BE540D500AA36F6 /* AudioImageModel.swift */,
-				B80DD3062BD9537800A4C38A /* VoicedImageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,7 +158,9 @@
 				B87B39B62BD8FD310070566E /* AddNewImage.swift */,
 				B8700A442BDB99880055BC38 /* AddNewAudio.swift */,
 				B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */,
+				B858958F2BF232620072A42B /* AudioRecorder.swift */,
 				B86812752BE52BF500AA36F6 /* AddAudioButton.swift */,
+				B80DD3062BD9537800A4C38A /* ImageProperties.swift */,
 				B85FFFA62BDFDAE200D95954 /* PublicAudioImageProperties.swift */,
 				B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */,
 				B86C6E562BC9672500B5F991 /* Item.swift */,
@@ -322,11 +325,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85895902BF232620072A42B /* AudioRecorder.swift in Sources */,
 				B86C6E552BC9672500B5F991 /* ContentView.swift in Sources */,
 				B8700A452BDB99880055BC38 /* AddNewAudio.swift in Sources */,
 				B86812762BE52BF500AA36F6 /* AddAudioButton.swift in Sources */,
 				B82DD2702BF1A0850007F495 /* popoverForAudioChoice.swift in Sources */,
-				B80DD3072BD9537800A4C38A /* VoicedImageModel.swift in Sources */,
+				B80DD3072BD9537800A4C38A /* ImageProperties.swift in Sources */,
 				B86812742BE5110B00AA36F6 /* InToolbarAfterSelection.swift in Sources */,
 				B86812782BE540D500AA36F6 /* AudioImageModel.swift in Sources */,
 				B87B39B72BD8FD310070566E /* AddNewImage.swift in Sources */,

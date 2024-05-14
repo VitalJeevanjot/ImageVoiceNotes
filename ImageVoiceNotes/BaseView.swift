@@ -11,7 +11,9 @@ import AVFAudio
 struct BaseView: View {
     
     var body: some View {
-        let _ = loadAudio()
+//        AudioRecorder()
+//        Text("hello")
+//        let _ = loadAudio()
         NavigationSplitView {
             Text("Listing something")
             
@@ -39,39 +41,39 @@ struct BaseView: View {
             Text("Selected items")
         }
         .tint(.black)
-
+//
     }
     
-    func loadAudio() {
-        print("calling load audio")
-        let fg = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        do {
-            let filesURLs = try  FileManager.default.contentsOfDirectory(at: fg, includingPropertiesForKeys: [])
-            print(filesURLs)
-        }
-        catch {
-            print("\(error)")
-        }
-//        let url = URL(fileURLWithPath: "/private/var/mobile/Containers/Shared/AppGroup/5CEF82B9-17AB-48D4-95FF-3C6339BB136C/File Provider Storage/Shared/Ranjit Pura 4.m4a")
-//        print(url.path())
-//        print(FileManager.default.fileExists(atPath: url.path()))
-        
-//        defer {
-//            url.stopAccessingSecurityScopedResource()
-//        }
-//        
-//        print("the value is")
-//        let val = url.startAccessingSecurityScopedResource()
-//        print(val)
-//        print("val")
+//    func loadAudio() {
+//        print("calling load audio")
+//        let fg = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 //        do {
-//            let ad = try AVAudioPlayer(contentsOf: url)
-//            print("File loaded.....")
-//            print(ad.duration)
-//        } catch {
-//            print("err is: \(error)")
+//            let filesURLs = try  FileManager.default.contentsOfDirectory(at: fg, includingPropertiesForKeys: [])
+//            print(filesURLs)
 //        }
-    }
+//        catch {
+//            print("\(error)")
+//        }
+////        let url = URL(fileURLWithPath: "/private/var/mobile/Containers/Shared/AppGroup/5CEF82B9-17AB-48D4-95FF-3C6339BB136C/File Provider Storage/Shared/Ranjit Pura 4.m4a")
+////        print(url.path())
+////        print(FileManager.default.fileExists(atPath: url.path()))
+//        
+////        defer {
+////            url.stopAccessingSecurityScopedResource()
+////        }
+////        
+////        print("the value is")
+////        let val = url.startAccessingSecurityScopedResource()
+////        print(val)
+////        print("val")
+////        do {
+////            let ad = try AVAudioPlayer(contentsOf: url)
+////            print("File loaded.....")
+////            print(ad.duration)
+////        } catch {
+////            print("err is: \(error)")
+////        }
+//    }
     
 }
 

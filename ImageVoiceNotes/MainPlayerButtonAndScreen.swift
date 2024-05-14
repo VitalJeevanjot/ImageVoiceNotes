@@ -14,7 +14,7 @@ struct MainPlayerButtonAndScreen: View {
     @State private var appearUI = true
     @State private var closed = true
     
-    @ObservedObject var viModel: VoicedImageModel
+    @ObservedObject var viModel: ImageProperties
     
     
     var body: some View {
@@ -114,6 +114,6 @@ struct MainPlayerButtonAndScreen: View {
 
 #Preview {
     @State var publicProperties = PublicAudioImageProperties.shared
-    @StateObject var viModel = VoicedImageModel()
+    @StateObject var viModel = ImageProperties()
     return MainPlayerButtonAndScreen(publicProperties: publicProperties, viModel: viModel)
 }

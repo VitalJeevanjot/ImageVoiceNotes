@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ImageViewer: View {
-    @StateObject private var voicedImageModel = VoicedImageModel()
+    @StateObject private var voicedImageModel = ImageProperties()
     @State private var publicProperties = PublicAudioImageProperties.shared
     
     @Environment (\.dismiss) private var dismiss
@@ -69,7 +69,7 @@ struct ImageViewer: View {
 }
 
 struct ImageViewing: View {
-    @ObservedObject var viModel: VoicedImageModel
+    @ObservedObject var viModel: ImageProperties
     var publicProperties: PublicAudioImageProperties
     var isDemo: Bool = false
     

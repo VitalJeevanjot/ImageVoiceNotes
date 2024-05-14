@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>The audio will be recorded and stored only if accepted by user locally attached to the image of user&apos;s choice in this app.</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 </dict>

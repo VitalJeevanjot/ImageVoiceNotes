@@ -13,7 +13,7 @@ import PhotosUI
 struct AddNewImage: View {
 
    
-    @ObservedObject var viewModel: VoicedImageModel
+    @ObservedObject var viewModel: ImageProperties
     @Environment (\.dismiss) private var dismiss
     var inToolbar = false
 
@@ -56,11 +56,11 @@ struct AddNewImage: View {
 
 
 #Preview {
-    @StateObject var vm = VoicedImageModel()
+    @StateObject var vm = ImageProperties()
     return AddNewImage(viewModel: vm)
 }
 
 #Preview("in toolbar") {
-    @StateObject var vm = VoicedImageModel()
+    @StateObject var vm = ImageProperties()
     return AddNewImage(viewModel: vm, inToolbar: true)
 }

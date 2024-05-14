@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InToolbarAfterSelection: View {
-    @ObservedObject var viewModel: VoicedImageModel
+    @ObservedObject var viewModel: ImageProperties
     var publicProperties: PublicAudioImageProperties
     
     var body: some View {
@@ -37,7 +37,7 @@ struct InToolbarAfterSelection: View {
 }
 
 #Preview {
-    let voicedImageModel = VoicedImageModel()
+    let voicedImageModel = ImageProperties()
     @State var publicProperties = PublicAudioImageProperties.shared
     return NavigationStack {
         InToolbarAfterSelection(viewModel: voicedImageModel, publicProperties: publicProperties)
@@ -46,7 +46,7 @@ struct InToolbarAfterSelection: View {
 
 #Preview("Save button") {
     
-    let voicedImageModel = VoicedImageModel()
+    let voicedImageModel = ImageProperties()
     @State var publicProperties = PublicAudioImageProperties.shared
     publicProperties.isReadyToPlayFull = true
     publicProperties.audioFileSelectedAndAdded = true
