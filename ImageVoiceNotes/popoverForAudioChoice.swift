@@ -10,6 +10,7 @@ import SwiftUI
 struct popoverForAudioChoice: View {
     @Binding var presentFilePicker: Bool
     @Binding var presentPopOver: Bool
+    var publicProperties : PublicAudioImageProperties
     
     var body: some View {
         HStack {
@@ -35,6 +36,12 @@ struct popoverForAudioChoice: View {
             
             VStack {
                 Button {
+                    presentPopOver = false
+                    publicProperties.audioPlayer.stop()
+                    publicProperties.isPlaying = false
+                    publicProperties.audioFileSelectedAndAdded = false
+                    publicProperties.isReadyToPlayFull = false
+                    publicProperties.showRecordingUI = true
                     print("Record")
                 } label: {
                     Image(systemName: "record.circle")
@@ -60,6 +67,7 @@ struct popoverForAudioChoice: View {
 #Preview {
     @State var filePicker = false
     @State var popOver = false
+    @State var publicproperties = PublicAudioImageProperties.shared
     
-    return popoverForAudioChoice(presentFilePicker: $filePicker, presentPopOver: $popOver)
+    return popoverForAudioChoice(presentFilePicker: $filePicker, presentPopOver: $popOver, publicProperties: publicproperties)
 }

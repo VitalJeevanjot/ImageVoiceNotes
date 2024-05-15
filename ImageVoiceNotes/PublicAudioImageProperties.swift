@@ -30,6 +30,8 @@ import AVFAudio
     var selectedFilePathForImage = URL(string: "")
     var selectedFilePathForAudio = URL(string: "")
     
+    var showRecordingUI = false
+    
     @ObservationIgnored var audioPlayer = AVAudioPlayer()
     
     @ObservationIgnored var pickedAudioData = Data()

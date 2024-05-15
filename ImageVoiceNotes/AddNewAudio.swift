@@ -12,32 +12,43 @@ struct AddNewAudio: View {
     var toolbar = false
     
     var publicProperties: PublicAudioImageProperties
-        
+    
     
     //    @Binding private var durationOfAudioPlayed: TimeInterval
     
     var body: some View {
-        //        let _ = print("\(publicProperties.audioPlayer?.currentTime)")
+        let _ = print("current time from AddNewAudio")
+        let _ = print("\(publicProperties.audioPlayer.currentTime)")
         //        let _ = print("\(publicProperties.audioPlayer?.duration)")
         return VStack {
             //            Text("hello from AddNewAudio")
             //            let _ = print("hello from vstack in AddNewAudio")
             Group {
                 if publicProperties.audioFileSelectedAndAdded {
-                    if publicProperties.durationTime > 0 {
-                        //                    Text("hello")
-                        AudioPlayer(publicProperties: publicProperties)
-                        
+                    Group {
+                        if publicProperties.durationTime > 0 {
+                            let _ = print("audio file selected------2")
+                            //                    Text("hello")
+                            AudioPlayer(publicProperties: publicProperties)
+                            
+                        }
                     }
                 } else {
-                    AddAudioButton(publicProperties: publicProperties, toolbar: toolbar)
-                    
-                    Text("Add audio")
-                        .font(.subheadline)
-                        .fontWeight(.heavy)
-                        .foregroundStyle(.black)
-                        .padding([.top], 10)
+                    Group {
+                        if publicProperties.showRecordingUI {
+                            AudioRecorder()
+                        } else {
+                            AddAudioButton(publicProperties: publicProperties, toolbar: toolbar)
+                            
+                            Text("Add audio")
+                                .font(.subheadline)
+                                .fontWeight(.heavy)
+                                .foregroundStyle(.black)
+                                .padding([.top], 10)
+                        }
+                    }
                 }
+                
                 if publicProperties.isLoading {
                     ProgressView()
                         .padding()
@@ -49,16 +60,18 @@ struct AddNewAudio: View {
                 }
                 
                 
-            }
-            
+            } 
         }
         .onDisappear(perform: {
-            print("disappeared....")
-            publicProperties.audioPlayer.stop()
-            publicProperties.isPlaying = false
-            publicProperties.audioFileSelectedAndAdded = false
-            publicProperties.isReadyToPlayFull = false
-        })
+           print("disappeared....")
+           publicProperties.audioPlayer.stop()
+           publicProperties.isPlaying = false
+           publicProperties.audioFileSelectedAndAdded = false
+           publicProperties.isReadyToPlayFull = false
+           publicProperties.showRecordingUI = false
+       })
+
+        
     }
     
 }

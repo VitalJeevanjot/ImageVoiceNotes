@@ -19,7 +19,7 @@ struct ImageViewer: View {
     }
     
     var body: some View {
-        let _ = print("rendering image viewer")
+//        let _ = print("rendering image viewer")
         Group {
             if  voicedImageModel.pickedItemIdentifier.isEmpty && !demo {
                 AddNewImage(viewModel: voicedImageModel)
@@ -54,6 +54,7 @@ struct ImageViewer: View {
             
         }
         .toolbar {
+            // show it only if viewing, not while creating.
             ToolbarItem {
                 Button {
                     dismiss()

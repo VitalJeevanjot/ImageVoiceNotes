@@ -11,7 +11,8 @@ import AVFAudio
 struct AddAudioButton: View {
     @State private var presentFilePicker = false
     @State private var presentPopOver = false
-    var publicProperties: PublicAudioImageProperties
+    
+    @Bindable var publicProperties: PublicAudioImageProperties
     var toolbar = false
     
     
@@ -23,20 +24,22 @@ struct AddAudioButton: View {
                 .symbolRenderingMode(.monochrome)
                 .apply {
                     if !toolbar {
-                        $0.font(.system(size: 100))
-                            .padding(EdgeInsets(top: 10, leading: 5, bottom: 10, trailing: 20))
+                        $0.resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 5))
                     } else {
                         $0.font(.system(size: 14))
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 3, trailing: 12))
                     }
                     
                 }
+                .frame(maxWidth: 100)
                 .background(Color.black)
                 .clipShape(.rect(cornerRadius: 10))
                 .foregroundStyle(.white)
         }
         .popover(isPresented: $presentPopOver) {
-            popoverForAudioChoice(presentFilePicker: $presentFilePicker, presentPopOver: $presentPopOver)
+            popoverForAudioChoice(presentFilePicker: $presentFilePicker, presentPopOver: $presentPopOver, publicProperties: publicProperties)
         }
         .fileImporter(isPresented: $presentFilePicker, allowedContentTypes: [.audio]) { result in
             switch result {

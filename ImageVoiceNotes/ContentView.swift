@@ -13,9 +13,9 @@ struct ContentView: View {
 //    @Query private var items: [Item]
 
     var body: some View {
-//        BaseView()
-        AudioRecorder()
+        BaseView()
             .preferredColorScheme(.light)
+//        AudioRecorder()
 //        NavigationSplitView {
 //            List {
 //                ForEach(items) { item in

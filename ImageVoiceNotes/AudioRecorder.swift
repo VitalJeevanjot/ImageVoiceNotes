@@ -19,6 +19,10 @@ struct AudioRecorder: View {
     @State private var isPaused = true
     @State private var currentTime = TimeInterval(0)
     
+    @State private var fileName = URL(string: "hi")!
+    
+    @State private var manualDisappear = false
+    
     
     var body: some View {
         componentFormatter.unitsStyle = .positional
@@ -34,6 +38,7 @@ struct AudioRecorder: View {
                 
                 HStack {
                     Button {
+                        manualDisappear = false
                         startPauseRecording()
                     } label: {
                         Label("Record or Pause", systemImage: isPaused ? "recordingtape.circle.fill" : "pause.rectangle.fill")
@@ -45,6 +50,7 @@ struct AudioRecorder: View {
                     Group {
                         if isRecording {
                             Button {
+                                manualDisappear = true
                                 stopRecording()
                             }label: {
                                 Label("Record or Pause", systemImage: "stop.circle.fill")
@@ -67,6 +73,17 @@ struct AudioRecorder: View {
                         .foregroundStyle(.black)
                 }
                 .buttonStyle(.borderedProminent)
+            }
+        }
+        .onDisappear {
+            stopRecording()
+            if manualDisappear == false {
+                publicProperties.audioPlayer.stop()
+                publicProperties.isPlaying = false
+                publicProperties.audioFileSelectedAndAdded = false
+                publicProperties.isReadyToPlayFull = false
+                publicProperties.showRecordingUI = false
+                print("Disappeared without stopping audio in AudioRecorder...")
             }
         }
         .task {
@@ -124,7 +141,7 @@ struct AudioRecorder: View {
         
         let audioPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         
-        let fileName = audioPath.appendingPathComponent("temp.m4a")
+        fileName = audioPath.appendingPathComponent("temp.m4a")
         
         
 //        let x = NSError(domain: NSOSStatusErrorDomain, code:1718449215, userInfo: .none)
@@ -143,7 +160,7 @@ struct AudioRecorder: View {
             try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
 //            try AVAudioSession.sharedInstance().setActive(true)
             audioRecording = try AVAudioRecorder(url: fileName, settings: settings)
-            audioRecording!.delegate = AudioRecorderDelegatee.shared            
+            audioRecording!.delegate = AudioRecorderDelegatee.shared
             print(try FileManager.default.contentsOfDirectory(atPath: audioPath.path()))
             
             print("Prepared.")
@@ -170,19 +187,44 @@ struct AudioRecorder: View {
     
     func stopRecording() {
         do {
+            publicProperties.showRecordingUI = false
             audioRecording!.stop()
-//            try AVAudioSession.sharedInstance().setActive(false)
+            try AVAudioSession.sharedInstance().setCategory(.playback)
         } catch {
             print("Audio seesion cannot of deactivated err is: \(error)")
         }
         isPaused = true
         isRecording = false
         currentTime = TimeInterval(0)
+        
+        publicProperties.isLoading = true
+        do {
+            let recordedFileData = try Data(contentsOf: fileName)
+            
+            publicProperties.audioPlayer = try AVAudioPlayer(data: recordedFileData)
+            
+            audioRecording!.deleteRecording()
+        } catch {
+            print("err is on copying recorded audio to data: \(error)")
+        }
+        print("FINISHED RECORDING>>>>>>")
+        publicProperties.audioFileSelectedAndAdded = true
+        publicProperties.isPlaying = false
+        publicProperties.isReadyToPlayFull = true
+        publicProperties.isLoading = false
+        
+        publicProperties.durationTime = publicProperties.audioPlayer.duration
+        publicProperties.setUpTimer()
+        //            print(
+        publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+        
+        print("FINISHED RECORDING>>>>>>2")
+        
         // hide presentor, prepare the file, copy to data to publicproperties audioplayer, delete the file(also on dissapear check if file exists then delete it and recordingStarted = false)
     }
     
     func updateTiming() {
-        if isRecording && !isPaused {
+        if isRecording && !isPaused &&             publicProperties.showRecordingUI {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
                 currentTime = audioRecording!.currentTime
                 print("Updaing")
@@ -206,5 +248,7 @@ class AudioRecorderDelegatee: NSObject, AVAudioRecorderDelegate {
 }
 
 #Preview {
-    AudioRecorder()
+    @State var publicProperties = PublicAudioImageProperties.shared
+
+    return AudioRecorder()
 }
