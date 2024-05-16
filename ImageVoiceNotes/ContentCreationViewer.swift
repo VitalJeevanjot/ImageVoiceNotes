@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ImageViewer: View {
+struct ContentCreationViewer: View {
     @StateObject private var voicedImageModel = ImageProperties()
     @State private var publicProperties = PublicAudioImageProperties.shared
         
@@ -129,11 +129,11 @@ struct ImageViewing: View {
 }
 
 #Preview {
-    ImageViewer(diemo: false)
+    ContentCreationViewer(diemo: false)
 }
 
 #Preview {
-    ImageViewer(diemo: true)
+    ContentCreationViewer(diemo: true)
 }
 #Preview {
     Group {
@@ -148,7 +148,7 @@ struct ImageViewing: View {
 //            .frame(maxWidth: (UIScreen.main.bounds.height - 20), maxHeight: (UIScreen.main.bounds.width - 20))
 //            .shadow(radius: 10)
 //            .padding()
-        ImageViewer(diemo: true)
+        ContentCreationViewer(diemo: true)
     }
 }
 
