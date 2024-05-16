@@ -22,7 +22,7 @@ struct InToolbarAfterSelection: View {
             }
             AddNewImage(viewModel: viewModel, inToolbar: true)
             
-            if publicProperties.isReadyToPlayFull {
+            if publicProperties.isReadyToPlayFull && publicProperties.requiresSave {
                 Button {
                     saveFiles()
                     let dataToSave : AudioImageModel =
@@ -44,6 +44,7 @@ struct InToolbarAfterSelection: View {
     
     func saveData(_ model: AudioImageModel) {
         modelContext.insert(model)
+        publicProperties.requiresSave = false
     }
     
     func saveFiles() {

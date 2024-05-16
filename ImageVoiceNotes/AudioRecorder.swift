@@ -124,14 +124,14 @@ struct AudioRecorder: View {
     }
     
     func checkForRecordingPermission() async {
-        print("checking")
+//        print("checking")
 //        print(AVAudioApplication.shared.recordPermission)
         if await AVAudioApplication.requestRecordPermission() {
             canRecord = true
-            print("Preparing recording")
+//            print("Preparing recording")
             prepareRecordingFile()
         } else {
-            print("false")
+//            print("false")
             canRecord = false
         }
     }

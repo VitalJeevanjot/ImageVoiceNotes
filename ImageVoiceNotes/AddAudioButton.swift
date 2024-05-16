@@ -46,6 +46,7 @@ struct AddAudioButton: View {
             case .success(let file):
                 updateUIAfterAudioSelect()
                 presentFilePicker = false
+                publicProperties.requiresSave = true
                 guard file.startAccessingSecurityScopedResource() else {
                     return
                 }

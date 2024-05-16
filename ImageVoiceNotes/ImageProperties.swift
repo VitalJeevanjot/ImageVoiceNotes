@@ -18,6 +18,7 @@ import PhotosUI
             if pickedItem != nil {
                 pickedItemIdentifier = pickedItem!.identifier
             }
+            PublicAudioImageProperties.shared.requiresSave = true
         }
     }
     

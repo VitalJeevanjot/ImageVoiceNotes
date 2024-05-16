@@ -1,5 +1,5 @@
 //
-//  ImageViewer.swift
+//  ContentCreationViewer.swift
 //  ImageVoiceNotes
 //
 //  Created by Jeevanjot Singh on 25/04/24.
@@ -12,6 +12,8 @@ struct ContentCreationViewer: View {
     @State private var publicProperties = PublicAudioImageProperties.shared
         
     @Environment (\.dismiss) private var dismiss
+    @State private var showBackButtonAlert = false
+
     var demo: Bool
     
     init(diemo: Bool = false) {
@@ -62,9 +64,43 @@ struct ContentCreationViewer: View {
                 }
                 
             }
-
-            
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    if PublicAudioImageProperties.shared.requiresSave {
+                        showBackButtonAlert = true
+                    } else {
+                        dismiss()
+                    }
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                        Text("Back")
+                    }
+                }
+                .tint(.black)
+            }
+        }
+        .alert("Going back with unsaved changes?", isPresented: $showBackButtonAlert, actions: {
+            Button(role: .destructive) {
+                showBackButtonAlert = false
+                dismiss()
+            } label: {
+                Text("main page")
+            }
+            Button(role: .cancel) {
+                showBackButtonAlert = false
+            } label: {
+                Text("current")
+            }
+        })
+        .onDisappear(perform: {
+            publicProperties.requiresSave = false
+        })
+
+
 //        .toolbar {
 //            // show it only if viewing, not while creating.
 //            ToolbarItem {
@@ -129,26 +165,30 @@ struct ImageViewing: View {
 }
 
 #Preview {
-    ContentCreationViewer(diemo: false)
+    NavigationStack {
+        ContentCreationViewer(diemo: false)
+    }
 }
 
 #Preview {
     ContentCreationViewer(diemo: true)
 }
 #Preview {
-    Group {
-        Image("sampleImage")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .clipShape(.rect(cornerRadius: 20))
-            .shadow(radius: 10)
-            .padding()
-//            .resizable().aspectRatio(contentMode: .fit)
-//            .clipShape(.rect(cornerRadius: 20))
-//            .frame(maxWidth: (UIScreen.main.bounds.height - 20), maxHeight: (UIScreen.main.bounds.width - 20))
-//            .shadow(radius: 10)
-//            .padding()
-        ContentCreationViewer(diemo: true)
+    NavigationStack {
+        Group {
+            Image("sampleImage")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .clipShape(.rect(cornerRadius: 20))
+                .shadow(radius: 10)
+                .padding()
+            //            .resizable().aspectRatio(contentMode: .fit)
+            //            .clipShape(.rect(cornerRadius: 20))
+            //            .frame(maxWidth: (UIScreen.main.bounds.height - 20), maxHeight: (UIScreen.main.bounds.width - 20))
+            //            .shadow(radius: 10)
+            //            .padding()
+            ContentCreationViewer(diemo: true)
+        }
     }
 }
 

@@ -33,6 +33,8 @@ import AVFAudio
     var showRecordingUI = false
     var textOfCreation = "Untitled"
     
+    var requiresSave = false
+    
     @ObservationIgnored var audioPlayer = AVAudioPlayer()
     
     @ObservationIgnored var pickedAudioData = Data()
