@@ -7,15 +7,25 @@
 
 import SwiftUI
 import AVFAudio
+import SwiftData
 
 struct BaseView: View {
+    
+    @Query private var creations: [AudioImageModel]
     
     var body: some View {
 //        AudioRecorder()
 //        Text("hello")
 //        let _ = loadAudio()
         NavigationSplitView {
-            Text("Listing something")
+            List {
+                ForEach(creations) {
+                    item in
+                    Text(item.nameOfCreation)
+                    
+                }
+                
+            }
             
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

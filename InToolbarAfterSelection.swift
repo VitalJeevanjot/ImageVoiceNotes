@@ -10,6 +10,9 @@ import SwiftUI
 struct InToolbarAfterSelection: View {
     @ObservedObject var viewModel: ImageProperties
     var publicProperties: PublicAudioImageProperties
+    @Environment (\.dismiss) private var dismiss
+    @Environment (\.modelContext) private var modelContext
+
     
     var body: some View {
 //        let _ = print("toolbar")
@@ -21,7 +24,11 @@ struct InToolbarAfterSelection: View {
             
             if publicProperties.isReadyToPlayFull {
                 Button {
-                    print("full")
+                    saveFiles()
+                    let dataToSave : AudioImageModel =
+                    AudioImageModel(nameOfCreation: publicProperties.textOfCreation, imagePicked: publicProperties.pickedImageDataURL!.path(), audioPicked: publicProperties.pickedAudioDataURL!.path(), createdDate: Date.now, importedDate: nil)//
+                    saveData(dataToSave)
+                    dismiss()
                 } label: {
                     Label("Save", systemImage: "checkmark.square.fill")
                         .labelStyle(.iconOnly)
@@ -32,6 +39,25 @@ struct InToolbarAfterSelection: View {
                 
             }
             
+        }
+    }
+    
+    func saveData(_ model: AudioImageModel) {
+        modelContext.insert(model)
+    }
+    
+    func saveFiles() {
+        let audioData = publicProperties.pickedAudioData
+        let imageData = publicProperties.pickedImageData
+        publicProperties.pickedAudioDataURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(UUID().uuidString, conformingTo: .audio)
+        publicProperties.pickedImageDataURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(UUID().uuidString, conformingTo: .image)
+
+
+        do {
+            try audioData.write(to: publicProperties.pickedAudioDataURL!)
+            try imageData.write(to: publicProperties.pickedImageDataURL!)
+        } catch {
+            print("On file saving err is: \(error)")
         }
     }
 }

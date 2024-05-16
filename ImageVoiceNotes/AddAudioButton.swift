@@ -27,13 +27,13 @@ struct AddAudioButton: View {
                         $0.resizable()
                             .aspectRatio(contentMode: .fit)
                             .padding(EdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 5))
+                            .frame(maxWidth: 100)
                     } else {
                         $0.font(.system(size: 14))
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 3, trailing: 12))
                     }
                     
                 }
-                .frame(maxWidth: 100)
                 .background(Color.black)
                 .clipShape(.rect(cornerRadius: 10))
                 .foregroundStyle(.white)

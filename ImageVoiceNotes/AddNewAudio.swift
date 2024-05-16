@@ -17,8 +17,8 @@ struct AddNewAudio: View {
     //    @Binding private var durationOfAudioPlayed: TimeInterval
     
     var body: some View {
-        let _ = print("current time from AddNewAudio")
-        let _ = print("\(publicProperties.audioPlayer.currentTime)")
+//        let _ = print("current time from AddNewAudio")
+//        let _ = print("\(publicProperties.audioPlayer.currentTime)")
         //        let _ = print("\(publicProperties.audioPlayer?.duration)")
         return VStack {
             //            Text("hello from AddNewAudio")

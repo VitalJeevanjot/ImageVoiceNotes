@@ -152,8 +152,9 @@ struct AudioRecorder: View {
         
         let settings : [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1
+            AVSampleRateKey: 44100,
+            AVNumberOfChannelsKey: 2,
+            AVEncoderBitRateKey: 320000
         ]
         print(fileName)
         do {
@@ -199,9 +200,9 @@ struct AudioRecorder: View {
         
         publicProperties.isLoading = true
         do {
-            let recordedFileData = try Data(contentsOf: fileName)
+            publicProperties.pickedAudioData = try Data(contentsOf: fileName)
             
-            publicProperties.audioPlayer = try AVAudioPlayer(data: recordedFileData)
+            publicProperties.audioPlayer = try AVAudioPlayer(data: publicProperties.pickedAudioData)
             
             audioRecording!.deleteRecording()
         } catch {

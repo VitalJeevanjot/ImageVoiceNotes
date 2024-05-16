@@ -10,7 +10,7 @@ import SwiftUI
 struct ImageViewer: View {
     @StateObject private var voicedImageModel = ImageProperties()
     @State private var publicProperties = PublicAudioImageProperties.shared
-    
+        
     @Environment (\.dismiss) private var dismiss
     var demo: Bool
     
@@ -19,13 +19,25 @@ struct ImageViewer: View {
     }
     
     var body: some View {
-//        let _ = print("rendering image viewer")
+//        let _ = print("rendering image viewer \(DateFormatter().string(from: Date.now))")
         Group {
             if  voicedImageModel.pickedItemIdentifier.isEmpty && !demo {
                 AddNewImage(viewModel: voicedImageModel)
             } else {
                 VStack {
 //                    Text("Hello")
+                    if publicProperties.isReadyToPlayFull {
+                        TextField(text: $publicProperties.textOfCreation) {
+                            Text("Name of creation.")
+                        }
+                        .foregroundStyle(.white)
+                        .padding()
+                        .background(.brown)
+                        .font(.title2)
+                        .clipShape(.rect(cornerRadius: 10))
+                        .padding()
+                    }
+                    
                     ImageViewing(viModel: voicedImageModel,publicProperties: publicProperties,  isDemo: demo)
                         .padding([.bottom], 50)
                     AddNewAudio(publicProperties: publicProperties)
@@ -53,16 +65,16 @@ struct ImageViewer: View {
 
             
         }
-        .toolbar {
-            // show it only if viewing, not while creating.
-            ToolbarItem {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark.bin.fill")
-                }
-            }
-        }
+//        .toolbar {
+//            // show it only if viewing, not while creating.
+//            ToolbarItem {
+//                Button {
+//                    dismiss()
+//                } label: {
+//                    Image(systemName: "xmark.bin.fill")
+//                }
+//            }
+//        }
 
     }
     

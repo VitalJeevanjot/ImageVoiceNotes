@@ -26,7 +26,7 @@ import PhotosUI
     
     @Published var imageStatus: Status?
     
-    var pickedImageData = Data()
+    
         
     enum Status {
         case loading
@@ -58,8 +58,8 @@ import PhotosUI
         do {
             if let data = try await pickedItem?.loadTransferable(type: Data.self)
             {
-                self.pickedImageData = data
-                if let uiImage = UIImage(data: self.pickedImageData) {
+                PublicAudioImageProperties.shared.pickedImageData = data
+                if let uiImage = UIImage(data: PublicAudioImageProperties.shared.pickedImageData) {
                     imageStatus = .finished(Image(uiImage: uiImage))
                 }
             } else {

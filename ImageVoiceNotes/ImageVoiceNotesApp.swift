@@ -27,6 +27,7 @@ struct ImageVoiceNotesApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(SampleModelContainer.shared.modelContainer)
+        .modelContainer(sharedModelContainer)
+//        .modelContainer(SampleModelContainer.shared.modelContainer)
     }
 }
