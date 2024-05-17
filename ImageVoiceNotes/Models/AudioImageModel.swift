@@ -17,13 +17,15 @@ class AudioImageModel {
     var imagePicked: String
     var audioPicked: String
     var createdDate: Date
+    var isImported: Bool
     var importedDate: Date?
     
-    init(nameOfCreation: String, imagePicked: String, audioPicked: String, createdDate: Date, importedDate: Date?) {
+    init(nameOfCreation: String, imagePicked: String, audioPicked: String, createdDate: Date, isImported: Bool, importedDate: Date? = nil) {
         self.nameOfCreation = nameOfCreation
         self.imagePicked = imagePicked
         self.audioPicked = audioPicked
         self.createdDate = createdDate
+        self.isImported = isImported
         self.importedDate = importedDate
     }
 }

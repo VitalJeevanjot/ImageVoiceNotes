@@ -26,7 +26,7 @@ struct InToolbarAfterSelection: View {
                 Button {
                     saveFiles()
                     let dataToSave : AudioImageModel =
-                    AudioImageModel(nameOfCreation: publicProperties.textOfCreation, imagePicked: publicProperties.pickedImageDataURL!.path(), audioPicked: publicProperties.pickedAudioDataURL!.path(), createdDate: Date.now, importedDate: nil)//
+                    AudioImageModel(nameOfCreation: publicProperties.textOfCreation, imagePicked: publicProperties.pickedImageDataURL!.path(), audioPicked: publicProperties.pickedAudioDataURL!.path(), createdDate: Date.now, isImported: false, importedDate: nil)//
                     saveData(dataToSave)
                     dismiss()
                 } label: {
