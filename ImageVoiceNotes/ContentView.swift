@@ -13,8 +13,8 @@ struct ContentView: View {
 //    @Query private var items: [Item]
 
     var body: some View {
-//        BaseView()
-        CreationViewer()
+//        CreationViewer()
+        BaseView()
             .preferredColorScheme(.light)
 //        AudioRecorder()
 //        NavigationSplitView {

@@ -40,8 +40,8 @@ import AVFAudio
     @ObservationIgnored var pickedAudioData = Data()
     @ObservationIgnored var pickedImageData = Data()
     
-    @ObservationIgnored var pickedAudioDataURL = URL(string: "hello")
-    @ObservationIgnored var pickedImageDataURL = URL(string: "hello")
+    @ObservationIgnored var pickedAudioDataFileName = ""
+    @ObservationIgnored var pickedImageDataFileName = ""
     
     func setUpTimer() {
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { Timer in

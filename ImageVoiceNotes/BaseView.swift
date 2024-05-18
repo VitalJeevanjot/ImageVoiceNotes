@@ -12,25 +12,68 @@ import SwiftData
 struct BaseView: View {
     
     @Query private var creations: [AudioImageModel]
+    @State private var isPresentCreationViewer = false
+    //    @State private var publicProperties = PublicAudioImageProperties.shared
+    //    @StateObject private var viModel = ImageProperties()
+    let direc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    @State private var currentSelectModel: AudioImageModel?
     
     var body: some View {
         //        AudioRecorder()
         //        Text("hello")
-        let _ = loadAudio()
+        //        let _ = loadAudio()
         
         NavigationSplitView {
             List {
-                ForEach(creations) {
-                    item in
-                    Text(item.nameOfCreation)
-                    
-                }
-                
+                ScrollView(showsIndicators: false) {
+                    ForEach(creations) {
+                        item in
+                        NavigationLink {
+                            CreationViewer(receivedAudioImageModel: item)
+                                .toolbar(.hidden)
+                        } label: {
+                            Group {
+                                HStack {
+                                    let fileURl: URL = direc.appendingPathComponent(item.imagePicked)
+                                    //                            let _ = print("File path on checkl..... \(fileURl.path())")
+                                    buttonImageView(fileURl: fileURl, creationName: item.nameOfCreation)
+                                    
+                                    Spacer()
+                                    Button {
+                                        print("play/pause")
+                                    } label: {
+                                        Label("Play or pause on main view", systemImage: "play.fill")
+                                            .labelStyle(.iconOnly)
+                                            .font(.title2)
+                                    }
+                                    .tint(.black)
+                                    .padding([.trailing])
+                                    
+                                }
+                                .padding(5)
+                                .background(Color(red: 248/255, green: 248/255, blue: 248/255))
+                                .clipShape(Capsule())
+                                
+                            }
+                            .padding(5)
+                            
+                            
+                        }
+                    }
+                    .shadow(radius: 2)
+                    .listRowSeparator(.hidden)
+                }.listSectionSeparator(.hidden)
+
             }
+            .listStyle(.inset)
+            .padding([.top], 20)
+            
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     NavigationLink {
                         ContentCreationViewer()
+                            .navigationBarBackButtonHidden(true)
                     } label: {
                         VStack {
                             Image(systemName: "plus")
@@ -47,6 +90,7 @@ struct BaseView: View {
                 
             }
             
+            
         } detail: {
             Text("Selected items")
         }
@@ -55,9 +99,9 @@ struct BaseView: View {
     }
     
     func loadAudio() {
-        let fg = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
         do {
-            let filesURLs = try  FileManager.default.contentsOfDirectory(at: fg, includingPropertiesForKeys: [])
+            let filesURLs = try  FileManager.default.contentsOfDirectory(at: direc, includingPropertiesForKeys: [])
             print(filesURLs)
         } catch {
             print("cannot load files from baseview err is: \(error)")
@@ -95,12 +139,72 @@ struct BaseView: View {
     
 }
 
+
+struct buttonImageView: View {
+    var fileURl: URL
+    var creationName: String
+    var body: some View {
+        let path: String = fileURl.path
+        let img: UIImage = UIImage(named: path)!
+        Image(uiImage: img)
+            .resizable()
+            .frame(width: 50, height: 50)
+            .clipShape(Circle())
+            .padding([.trailing], 10)
+        VStack (alignment: .leading) {
+            Text(creationName)
+                .font(.title2)
+            Text("date")
+                .font(.caption)
+        }
+        
+    }
+}
+
 extension View {
     func apply<V: View> (@ViewBuilder _ block:(Self) -> V) -> V {block (self)}
 }
 
 
 
+
+
 #Preview {
-    BaseView()
+    //    return List {
+    //
+    //        ForEach(1...50, id: \.self) {_ in
+    //            HStack {
+    //                Image("sampleImage")
+    //                    .resizable()
+    //                    .frame(width: 50, height: 50)
+    //                    .clipShape(Circle())
+    //                    .padding([.trailing], 10)
+    //                VStack (alignment: .leading) {
+    //                    Text("hello")
+    //                        .font(.title2)
+    //                    Text("date")
+    //                        .font(.caption)
+    //                }
+    //                Spacer()
+    //                Button {
+    //                    print("play/pause")
+    //                } label: {
+    //                    Label("Play or pause on main view", systemImage: "play")
+    //                        .labelStyle(.iconOnly)
+    //                        .font(.title2)
+    //                }
+    //                .tint(.black)
+    //                .padding([.trailing])
+    //            }
+    //            .padding(5)
+    //            .background(Color(red: 248/255, green: 248/255, blue: 248/255))
+    //            .clipShape(Capsule())
+    //        }
+    //        .shadow(radius: 2)
+    //        .listRowSeparator(.hidden)
+    //
+    //    }
+    //    .listStyle(.inset)
+    
+    return BaseView()
 }

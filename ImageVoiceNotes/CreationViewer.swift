@@ -8,66 +8,204 @@
 import SwiftUI
 import PDFKit
 import SwiftData
+import AVFAudio
 
 
 struct CreationViewer: View {
     //    var receivedAudioImageModel: AudioImageModel
-    let receivedAudioImageModel = AudioImageModel(nameOfCreation: "Sample name", imagePicked: "sampleImage", audioPicked: "music", createdDate: Date.now, isImported: false, importedDate: Date.now)
-    @Query private var aim: [AudioImageModel]
+    var receivedAudioImageModel: AudioImageModel
+    
     @State private var pdfView = PDFView()
     
+    @State private var showUI = true
+    
+    @State private var disappeared = false
+    
+    var publicProperties = PublicAudioImageProperties()
+    
+    @State private var imgDataReceived = Data()
+    
+    @State private var durationCheck = TimeInterval(0)
+    
+    @Environment (\.dismiss) private var dismiss
+    
+    
+    var isDemo = false
+    
+    let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
     var body: some View {
+        
         ZStack {
-            //            let imgToShow = UIImage(named: receivedAudioImageModel.imagePicked)
             
             //            let _ = print("djek")
             ////            let _ = print("\(aim[0])")
             ////            let _ = print("\(aim)")
             //            let _ = print("/djek")
-            var imgToShow: UIImage {
-                if !aim.isEmpty {
-                    print("HEre")
-                    if !aim[0].imagePicked.isEmpty {
-                        return UIImage(named: aim[0].imagePicked)!
+            //            var imgToShow: UIImage {
+            //                if !aim.isEmpty {
+            //                    print("HEre")
+            //                    if !aim[0].imagePicked.isEmpty {
+            //                        return UIImage(named: aim[0].imagePicked)!
+            //
+            //                    } else {
+            //                        return UIImage(named: receivedAudioImageModel.imagePicked)!
+            //                    }
+            //                } else {
+            //                    print("HEre or")
+            //                    return UIImage(named: receivedAudioImageModel.imagePicked)!
+            //                }
+            //            }
+            //            let _ = print("before uiimage assigned")
+            //            let _ = print("\( receivedAudioImageModel.imagePicked)")
+            //            let _ = print("\(imgDataReceived)")
+            //            let imgToShow = UIImage(data: imgDataReceived)
+            //            let _ = print("after uiimage assigned")
+            //
+            
+            let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
+            
+            
+            let imgToShow = UIImage(named: !isDemo ?  pickedImageDataURL.path() : receivedAudioImageModel.imagePicked)
+            
+            imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
+            
+            if showUI {
+                VStack {
+                    HStack {
+                        Button {
+                            dismiss()
+                        } label: {
+                            HStack {
+                                Image(systemName: "chevron.left")
+                                Text("Back")
+                            }
+                        }
+                        .foregroundStyle(.black)
                         
-                    } else {
-                        return UIImage(named: receivedAudioImageModel.imagePicked)!
+                        Spacer()
+                        
+                        Button {
+                            print("fit")
+                            withAnimation {
+                                pdfView.scaleFactor = pdfView.scaleFactorForSizeToFit
+                            }
+                            
+                            //                fitImage.toggle()
+                            //                print("\(fitImage)")
+                        } label: {
+                            Label("fit", systemImage: "square.dashed.inset.filled")
+                                .foregroundStyle(.black)
+                                .font(.title)
+                                .labelStyle(.iconOnly)
+                        }
+                        //                        .buttonStyle(.borderedProminent)
+                        //                        .tint(Color(red: 212/255, green: 212/255, blue: 212/255))
                     }
-                } else {
-                    print("HEre or")
-                    return UIImage(named: receivedAudioImageModel.imagePicked)!
+                    .padding([.leading, .trailing, .bottom])
+                    .background(Color(red: 232/255, green: 232/255, blue: 232/255))
+                    
+                    //            Image(uiImage: imgToShow)
+                    //                .resizable()
+                    //                .aspectRatio(contentMode: .fit)
+                    //                .shadow(radius: 10)
+                    
+                    Spacer()
+                    if durationCheck > 0 {
+                        AudioPlayer(publicProperties: publicProperties, onFront: true)
+                            .backgroundStyle(Color(red: 212/255, green: 212/255, blue: 212/255))
+                    }
+                    
                 }
             }
             
-            imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
-
-            
-            Button {
-                print("fit")
-                pdfView.scaleFactor = pdfView.scaleFactorForSizeToFit
-//                fitImage.toggle()
-//                print("\(fitImage)")
-            } label: {
-                Label("fit", systemImage: "square.dashed.inset.filled")
-                    .foregroundStyle(.black)
-            }
-            .buttonStyle(.borderedProminent)
-            //            Image(uiImage: imgToShow)
-            //                .resizable()
-            //                .aspectRatio(contentMode: .fit)
-            //                .shadow(radius: 10)
-            
-            
-            
         }
-        .ignoresSafeArea()
+        .background(.black)
+        .onAppear {
+            print("Task")
+            //            defer {
+            //                print("removing permission in creationViewer......>>,,,")
+            //                publicProperties.pickedAudioDataURL!.stopAccessingSecurityScopedResource()
+            //                publicProperties.pickedImageDataURL!.stopAccessingSecurityScopedResource()
+            //            }
+            //            pub
+            do {
+                print("Picked paths")
+                print(receivedAudioImageModel.audioPicked)
+                
+                let pickedAudioDataURL = dir.appendingPathComponent(receivedAudioImageModel.audioPicked, conformingTo: .audio)
+                let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
+                print(pickedImageDataURL)
+                print(pickedAudioDataURL)
+                print(try Data(contentsOf: pickedAudioDataURL))
+                //                guard publicProperties.pickedAudioDataURL!.startAccessingSecurityScopedResource() else {
+                //                    print("cannot get permission to read audio file in creationViewer")
+                //                    return
+                //                }
+                //
+                //                guard publicProperties.pickedImageDataURL!.startAccessingSecurityScopedResource() else {
+                //                    print("cannot get permission to read image file in creationViewer")
+                //                    return
+                //                }
+                
+                print("Before Picked audio data, creationview")
+                
+                publicProperties.pickedAudioData = try Data(contentsOf: pickedAudioDataURL)
+                print("Picked audio data, creationview")
+                publicProperties.pickedImageData = try Data(contentsOf: pickedImageDataURL)
+                print("Picked image data creationviewer")
+                imgDataReceived = publicProperties.pickedImageData
+                print("imgDataReceived")
+                print(imgDataReceived)
+                publicProperties.audioPlayer = try AVAudioPlayer(data: publicProperties.pickedAudioData)
+                durationCheck = publicProperties.audioPlayer.duration
+            } catch {
+                print("Audio data not loaded on creation view err is: \(error)")
+            }
+            autoHideUIWhenNotpaused()
+        }
+        
+        .onTapGesture {
+            showHideUI()
+        }
+        //        .ignoresSafeArea()
+        .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
+            pdfView.scaleFactor = pdfView.scaleFactorForSizeToFit
+            
+            print("Orientation changed")
+            
+        })
     }
+
+func showHideUI() {
+    withAnimation {
+        showUI.toggle()
+    }
+    autoHideUIWhenNotpaused()
+    
+}
+    func autoHideUIWhenNotpaused() {
+        //        print(publicProperties.isPlaying)
+        timer?.invalidate()
+        if showUI && publicProperties.isPlaying {
+            timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { Timer in
+                if disappeared == false && publicProperties.isPlaying {
+                    withAnimation {
+                        showUI = false
+                    }
+                }
+            }
+        }
+        
+    }
+    
 }
 
 #Preview {
     
     //    return CreationViewer(receivedAudioImageModel: sampleModel)
-    return CreationViewer()
+    @State var aim = AudioImageModel(nameOfCreation: "Sample name", imagePicked: "sampleImage", audioPicked: "music", createdDate: Date.now, isImported: false, importedDate: Date.now)
+    return CreationViewer(receivedAudioImageModel: aim, isDemo: true)
 }
 
 
@@ -76,23 +214,16 @@ struct imageViewerWithZoomEtc: UIViewRepresentable {
     
     var image: UIImage?
     var view = PDFView()
-        
+    
     func makeUIView(context: Context) -> PDFView {
         view.document = PDFDocument()
         guard let page = PDFPage(image: image!) else { return view }
         view.document?.insert(page, at: 0)
         view.autoScales = true
-//        view.scaleFactor = 1
+        view.backgroundColor = .black
         return view
     }
     
-    func callingMe() {
-        print(view.scaleFactor)
-        view.scaleFactor = 1
-//        view.scaleFactor = view.scaleFactorForSizeToFit
-//        view.zoomOut(Any?)
-        //        print("Callingme form creationViewer")
-    }
     
     func updateUIView(_ uiView: PDFView, context: Context) {
         // empty

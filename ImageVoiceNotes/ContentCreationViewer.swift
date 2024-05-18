@@ -33,7 +33,7 @@ struct ContentCreationViewer: View {
                             Text("Name of creation.")
                         }
                         .foregroundStyle(.white)
-                        .padding()
+                        .padding(5)
                         .background(.brown)
                         .font(.title2)
                         .clipShape(.rect(cornerRadius: 10))
@@ -98,6 +98,7 @@ struct ContentCreationViewer: View {
         })
         .onDisappear(perform: {
             publicProperties.requiresSave = false
+            publicProperties.textOfCreation = "Untitled"
         })
 
 

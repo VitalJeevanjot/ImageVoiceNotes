@@ -26,7 +26,12 @@ struct InToolbarAfterSelection: View {
                 Button {
                     saveFiles()
                     let dataToSave : AudioImageModel =
-                    AudioImageModel(nameOfCreation: publicProperties.textOfCreation, imagePicked: publicProperties.pickedImageDataURL!.path(), audioPicked: publicProperties.pickedAudioDataURL!.path(), createdDate: Date.now, isImported: false, importedDate: nil)//
+                    AudioImageModel(nameOfCreation: publicProperties.textOfCreation, imagePicked: publicProperties.pickedImageDataFileName, audioPicked: publicProperties.pickedAudioDataFileName, createdDate: Date.now, isImported: false, importedDate: nil)
+//                    print("===========")
+//                    print("\(String(describing: dataToSave))")
+////                    print("\(publicProperties.pickedImageDataURL!.path())")
+////                    print("\(publicProperties.pickedImageDataURL!)")
+//                    print("----------")
                     saveData(dataToSave)
                     dismiss()
                 } label: {
@@ -50,13 +55,17 @@ struct InToolbarAfterSelection: View {
     func saveFiles() {
         let audioData = publicProperties.pickedAudioData
         let imageData = publicProperties.pickedImageData
-        publicProperties.pickedAudioDataURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(UUID().uuidString, conformingTo: .audio)
-        publicProperties.pickedImageDataURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(UUID().uuidString, conformingTo: .image)
+        let uuidForAudio = UUID().uuidString
+        let uuidForImage = UUID().uuidString
+        publicProperties.pickedAudioDataFileName = uuidForAudio
+        publicProperties.pickedImageDataFileName = uuidForImage
+        let pickedAudioDataURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(uuidForAudio, conformingTo: .audio)
+        let pickedImageDataURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(uuidForImage, conformingTo: .image)
 
 
         do {
-            try audioData.write(to: publicProperties.pickedAudioDataURL!)
-            try imageData.write(to: publicProperties.pickedImageDataURL!)
+            try audioData.write(to: pickedAudioDataURL)
+            try imageData.write(to: pickedImageDataURL)
         } catch {
             print("On file saving err is: \(error)")
         }

@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import PDFKit
+import AVFAudio
 
 var timer: Timer?
 struct MainPlayerButtonAndScreen: View {
@@ -15,7 +16,8 @@ struct MainPlayerButtonAndScreen: View {
     @State private var closed = true
     
     @ObservedObject var viModel: ImageProperties
-    
+    @State private var pdfView = PDFView()
+
     
     var body: some View {
         Button {
@@ -35,21 +37,9 @@ struct MainPlayerButtonAndScreen: View {
             ZStack {
                 Color.black.ignoresSafeArea(edges: .all)
                 //                Image("sampleImage")
-                switch viModel.imageStatus {
-                case .finished(let image):
-                    image.resizable()
-                        .scaledToFit()
-                        .clipShape(.rect(cornerRadius: 18))
-                        .ignoresSafeArea(edges: .all)
-                        .padding()
-                    
-                case .failed:
-                    Image(systemName: "exclamationmark.triangle.fill")
-                default:
-                    //                Text("hello")
-                    ProgressView()
-                }
+                let imgToShow = UIImage(data: publicProperties.pickedImageData)!
                 
+                imageViewerWithZoomEtc(image: imgToShow, view: pdfView).ignoresSafeArea()
                 
                 if appearUI {
                     VStack(alignment: .leading) {
@@ -115,5 +105,26 @@ struct MainPlayerButtonAndScreen: View {
 #Preview {
     @State var publicProperties = PublicAudioImageProperties.shared
     @StateObject var viModel = ImageProperties()
+    
+    publicProperties.pickedImageData = UIImage(named: "sampleImage")!.pngData()!
+//    print(publicProperties.pickedImageData)
+    print("audio image data from Main player preview...")
+    publicProperties.pickedAudioData = NSDataAsset(name: "music")!.data
+    do {
+        publicProperties.audioPlayer =  try AVAudioPlayer(data: publicProperties.pickedAudioData)    //    guard let img = UIImage(named: "sampleImage") else {
+    } catch {
+        print("err is from MainPlayer preview: \(error)")
+    }
+    
+    publicProperties.durationTime = publicProperties.audioPlayer.duration
+    
+    publicProperties.setUpTimer()
+    //            print(
+    publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+//        print("cannot get data in preview from MainPlayer")
+//        return MainPlayerButtonAndScreen(publicProperties: publicProperties, viModel: viModel)
+//
+//    }
+//    publicProperties.pickedImageData = img!.pngData()
     return MainPlayerButtonAndScreen(publicProperties: publicProperties, viModel: viModel)
 }
