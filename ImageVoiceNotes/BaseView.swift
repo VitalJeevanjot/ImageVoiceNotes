@@ -37,7 +37,7 @@ struct BaseView: View {
                                 HStack {
                                     let fileURl: URL = direc.appendingPathComponent(item.imagePicked)
                                     //                            let _ = print("File path on checkl..... \(fileURl.path())")
-                                    buttonImageView(fileURl: fileURl, creationName: item.nameOfCreation)
+                                    buttonImageView(fileURl: fileURl, creationName: item.nameOfCreation, creationTime: item.createdDate)
                                     
                                     Spacer()
                                     Button {
@@ -143,19 +143,26 @@ struct BaseView: View {
 struct buttonImageView: View {
     var fileURl: URL
     var creationName: String
+    var creationTime: Date
+    let dateFormatter = DateFormatter()
     var body: some View {
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "yyyy/MM/dd hh:mm:ss a"
         let path: String = fileURl.path
         let img: UIImage = UIImage(named: path)!
-        Image(uiImage: img)
-            .resizable()
-            .frame(width: 50, height: 50)
-            .clipShape(Circle())
+        return Group {
+            Image(uiImage: img)
+                .resizable()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
             .padding([.trailing], 10)
-        VStack (alignment: .leading) {
-            Text(creationName)
-                .font(.title2)
-            Text("date")
-                .font(.caption)
+        
+            VStack (alignment: .leading) {
+                Text(creationName)
+                    .font(.title2)
+                Text(dateFormatter.string(from: creationTime))
+                    .font(.caption)
+            }
         }
         
     }
