@@ -217,7 +217,7 @@ struct AudioRecorder: View {
         publicProperties.durationTime = publicProperties.audioPlayer.duration
         publicProperties.setUpTimer()
         //            print(
-        publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+        publicProperties.audioPlayer.delegate = publicProperties
         
         print("FINISHED RECORDING>>>>>>2")
         

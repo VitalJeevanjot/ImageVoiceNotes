@@ -120,7 +120,7 @@ struct MainPlayerButtonAndScreen: View {
     
     publicProperties.setUpTimer()
     //            print(
-    publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+    publicProperties.audioPlayer.delegate = publicProperties
 //        print("cannot get data in preview from MainPlayer")
 //        return MainPlayerButtonAndScreen(publicProperties: publicProperties, viModel: viModel)
 //

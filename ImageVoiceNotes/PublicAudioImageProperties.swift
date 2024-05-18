@@ -9,7 +9,7 @@ import Foundation
 import AVFAudio
 
 
-@Observable class PublicAudioImageProperties {
+@Observable class PublicAudioImageProperties: NSObject, AVAudioPlayerDelegate {
     static let shared = PublicAudioImageProperties()
     
     var isReadyToPlayFull = false
@@ -59,21 +59,30 @@ import AVFAudio
         }
     }
     
-//    func audioPlayerDid
-
-}
-
-
-
-class AVAudioPlayerDeleteFunction: NSObject, AVAudioPlayerDelegate {
-    static let shared = AVAudioPlayerDeleteFunction()
-    
     override init() {
         super.init()
 //        PublicAudioImageProperties.shared.audioPlayer.delegate = self
     }
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print("Finished audio playing....")
-        PublicAudioImageProperties.shared.isPlaying = false
+        self.isPlaying = false
     }
+    
+//    func audioPlayerDid
+
 }
+
+
+
+//class AVAudioPlayerDeleteFunction: NSObject, AVAudioPlayerDelegate {
+//    static let shared = AVAudioPlayerDeleteFunction()
+//    
+//    override init() {
+//        super.init()
+////        PublicAudioImageProperties.shared.audioPlayer.delegate = self
+//    }
+//    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+//        print("Finished audio playing....")
+//        PublicAudioImageProperties.shared.isPlaying = false
+//    }
+//}

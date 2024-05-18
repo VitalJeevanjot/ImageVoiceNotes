@@ -159,10 +159,23 @@ struct CreationViewer: View {
                 print(imgDataReceived)
                 publicProperties.audioPlayer = try AVAudioPlayer(data: publicProperties.pickedAudioData)
                 durationCheck = publicProperties.audioPlayer.duration
+                publicProperties.durationTime = publicProperties.audioPlayer.duration
+                
+                publicProperties.setUpTimer()
+                //            print(
+                publicProperties.audioPlayer.delegate = publicProperties
+                publicProperties.isReadyToPlayFull = true
+                publicProperties.isLoading = false
             } catch {
                 print("Audio data not loaded on creation view err is: \(error)")
             }
             autoHideUIWhenNotpaused()
+        }
+        .onDisappear() {
+            publicProperties.audioPlayer.stop()
+            publicProperties.isPlaying = false
+            publicProperties.audioFileSelectedAndAdded = false
+            publicProperties.isReadyToPlayFull = false
         }
         
         .onTapGesture {

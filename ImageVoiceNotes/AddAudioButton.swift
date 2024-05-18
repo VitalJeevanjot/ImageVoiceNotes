@@ -133,7 +133,7 @@ struct AddAudioButton: View {
         
         publicProperties.setUpTimer()
         //            print(
-        publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+        publicProperties.audioPlayer.delegate = publicProperties
         publicProperties.isReadyToPlayFull = true
         publicProperties.isLoading = false
     }

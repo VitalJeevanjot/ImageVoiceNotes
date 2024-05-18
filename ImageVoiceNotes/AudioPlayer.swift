@@ -154,7 +154,7 @@ struct AudioPlayer: View {
             publicProperties.durationTime = publicProperties.audioPlayer.duration
             publicProperties.setUpTimer()
             //            print(
-            publicProperties.audioPlayer.delegate = AVAudioPlayerDeleteFunction.shared
+            publicProperties.audioPlayer.delegate = publicProperties
             publicProperties.isReadyToPlayFull = true
             publicProperties.isLoading = false
         } else {
