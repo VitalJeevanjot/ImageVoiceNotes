@@ -9,15 +9,29 @@ import SwiftUI
 import AVFAudio
 import SwiftData
 
+struct newModel {
+    var nameOfCreation: String
+    var imagePicked: String
+    var audioPicked: String
+    var createdDate: Date
+    var isImported: Bool
+    var importedDate: Date?
+    var isPlaying: Bool
+}
+
 struct BaseView: View {
     
     @Query private var creations: [AudioImageModel]
+    
+//    @State private var creationsUpdated = [newModel]()
+    
     @State private var isPresentCreationViewer = false
     //    @State private var publicProperties = PublicAudioImageProperties.shared
     //    @StateObject private var viModel = ImageProperties()
     let direc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     @State private var currentSelectModel: AudioImageModel?
+    
     
     var body: some View {
         //        AudioRecorder()
@@ -33,38 +47,13 @@ struct BaseView: View {
                             CreationViewer(receivedAudioImageModel: item)
                                 .toolbar(.hidden)
                         } label: {
-                            Group {
-                                HStack {
-                                    let fileURl: URL = direc.appendingPathComponent(item.imagePicked)
-                                    //                            let _ = print("File path on checkl..... \(fileURl.path())")
-                                    buttonImageView(fileURl: fileURl, creationName: item.nameOfCreation, creationTime: item.createdDate)
-                                    
-                                    Spacer()
-                                    Button {
-                                        print("play/pause")
-                                    } label: {
-                                        Label("Play or pause on main view", systemImage: "play.fill")
-                                            .labelStyle(.iconOnly)
-                                            .font(.title2)
-                                    }
-                                    .tint(.black)
-                                    .padding([.trailing])
-                                    
-                                }
-                                .padding(5)
-                                .background(Color(red: 248/255, green: 248/255, blue: 248/255))
-                                .clipShape(Capsule())
-                                
-                            }
-                            .padding(5)
-                            
-                            
+                                perItemView(item: item, fileURl: direc.appendingPathComponent(item.imagePicked))
                         }
                     }
                     .shadow(radius: 2)
                     .listRowSeparator(.hidden)
                 }.listSectionSeparator(.hidden)
-
+                
             }
             .listStyle(.inset)
             .padding([.top], 20)
@@ -95,47 +84,25 @@ struct BaseView: View {
             Text("Selected items")
         }
         .tint(.black)
+//        .task {
+//            creationsUpdated = creations.map {
+//                return newModel(nameOfCreation: $0.nameOfCreation, imagePicked: $0.imagePicked, audioPicked: $0.audioPicked, createdDate: $0.createdDate, isImported: $0.isImported, isPlaying: false)
+//            }
+//            
+//            print("\(String(describing: creationsUpdated))")
+//        }
         //
     }
     
-    func loadAudio() {
-        
-        do {
-            let filesURLs = try  FileManager.default.contentsOfDirectory(at: direc, includingPropertiesForKeys: [])
-            print(filesURLs)
-        } catch {
-            print("cannot load files from baseview err is: \(error)")
-        }
-        
-        //        print("calling load audio")
-        //        let fg = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        //        do {
-        //            let filesURLs = try  FileManager.default.contentsOfDirectory(at: fg, includingPropertiesForKeys: [])
-        //            print(filesURLs)
-        //        }
-        //        catch {
-        //            print("\(error)")
-        //        }
-        ////        let url = URL(fileURLWithPath: "/private/var/mobile/Containers/Shared/AppGroup/5CEF82B9-17AB-48D4-95FF-3C6339BB136C/File Provider Storage/Shared/Ranjit Pura 4.m4a")
-        ////        print(url.path())
-        ////        print(FileManager.default.fileExists(atPath: url.path()))
-        //
-        ////        defer {
-        ////            url.stopAccessingSecurityScopedResource()
-        ////        }
-        ////
-        ////        print("the value is")
-        ////        let val = url.startAccessingSecurityScopedResource()
-        ////        print(val)
-        ////        print("val")
-        ////        do {
-        ////            let ad = try AVAudioPlayer(contentsOf: url)
-        ////            print("File loaded.....")
-        ////            print(ad.duration)
-        ////        } catch {
-        ////            print("err is: \(error)")
-        ////        }
-    }
+    //    func loadAudio() {
+    //
+    //        do {
+    //            let filesURLs = try  FileManager.default.contentsOfDirectory(at: direc, includingPropertiesForKeys: [])
+    //            print(filesURLs)
+    //        } catch {
+    //            print("cannot load files from baseview err is: \(error)")
+    //        }
+    //    }
     
 }
 
@@ -155,8 +122,8 @@ struct buttonImageView: View {
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
-            .padding([.trailing], 10)
-        
+                .padding([.trailing], 10)
+            
             VStack (alignment: .leading) {
                 Text(creationName)
                     .font(.title2)

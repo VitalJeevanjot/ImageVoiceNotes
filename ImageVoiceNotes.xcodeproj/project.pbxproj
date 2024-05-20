@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B80DD3072BD9537800A4C38A /* ImageProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD3062BD9537800A4C38A /* ImageProperties.swift */; };
 		B826E0BF2BE9C8E1006273D3 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */; };
+		B82A9EDD2BFAE78A0016890D /* perItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A9EDC2BFAE78A0016890D /* perItemView.swift */; };
 		B82DD2702BF1A0850007F495 /* popoverForAudioChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */; };
 		B85895902BF232620072A42B /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B858958F2BF232620072A42B /* AudioRecorder.swift */; };
 		B85FFFA02BDE1C0100D95954 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85FFF9F2BDE1C0100D95954 /* PlayPauseButton.swift */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		B80DD3062BD9537800A4C38A /* ImageProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProperties.swift; sourceTree = "<group>"; };
 		B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		B82A9EDC2BFAE78A0016890D /* perItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perItemView.swift; sourceTree = "<group>"; };
 		B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = popoverForAudioChoice.swift; sourceTree = "<group>"; };
 		B8559EE72BD679F4000A48E0 /* ImageVoiceNotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImageVoiceNotes.entitlements; sourceTree = "<group>"; };
 		B858958F2BF232620072A42B /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		B86C6E462BC9672500B5F991 = {
 			isa = PBXGroup;
 			children = (
+				B82A9EDC2BFAE78A0016890D /* perItemView.swift */,
 				B86812732BE5110B00AA36F6 /* InToolbarAfterSelection.swift */,
 				B86C6E512BC9672500B5F991 /* ImageVoiceNotes */,
 				B86C6E642BC9672600B5F991 /* ImageVoiceNotesTests */,
@@ -333,6 +336,7 @@
 				B8700A452BDB99880055BC38 /* AddNewAudio.swift in Sources */,
 				B86812762BE52BF500AA36F6 /* AddAudioButton.swift in Sources */,
 				B82DD2702BF1A0850007F495 /* popoverForAudioChoice.swift in Sources */,
+				B82A9EDD2BFAE78A0016890D /* perItemView.swift in Sources */,
 				B80DD3072BD9537800A4C38A /* ImageProperties.swift in Sources */,
 				B86812742BE5110B00AA36F6 /* InToolbarAfterSelection.swift in Sources */,
 				B86812782BE540D500AA36F6 /* AudioImageModel.swift in Sources */,
