@@ -23,7 +23,7 @@ struct CreationViewer: View {
     
     var publicProperties = PublicAudioImageProperties()
     
-    @State private var imgDataReceived = Data()
+    //    @State private var imgDataReceived = Data()
     
     @State private var durationCheck = TimeInterval(0)
     
@@ -32,7 +32,10 @@ struct CreationViewer: View {
     @State private var pickedAudioDataURL: URL?
     @State private var pickedImageDataURL: URL?
     
+    @State private var lineLimit = 1
     
+//    @State private var imagePickedData = Data()
+//    @State private var audioPickedData = Data()
     var isDemo = false
     
     let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -41,37 +44,24 @@ struct CreationViewer: View {
         
         ZStack {
             
-            //            let _ = print("djek")
-            ////            let _ = print("\(aim[0])")
-            ////            let _ = print("\(aim)")
-            //            let _ = print("/djek")
-            //            var imgToShow: UIImage {
-            //                if !aim.isEmpty {
-            //                    print("HEre")
-            //                    if !aim[0].imagePicked.isEmpty {
-            //                        return UIImage(named: aim[0].imagePicked)!
-            //
-            //                    } else {
-            //                        return UIImage(named: receivedAudioImageModel.imagePicked)!
-            //                    }
-            //                } else {
-            //                    print("HEre or")
-            //                    return UIImage(named: receivedAudioImageModel.imagePicked)!
-            //                }
-            //            }
-            //            let _ = print("before uiimage assigned")
-            //            let _ = print("\( receivedAudioImageModel.imagePicked)")
-            //            let _ = print("\(imgDataReceived)")
+            //            let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
+            
+            
             //            let imgToShow = UIImage(data: imgDataReceived)
-            //            let _ = print("after uiimage assigned")
+            if let imgToShow = UIImage(data: publicProperties.pickedImageData) {
+                imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
+            }
+            //            let imgToShow = UIImage(named: !isDemo ?  pickedImageDataURL.path() : receivedAudioImageModel.imagePicked)
+            //            let _ = print("img to show 2...........")
+            //            let _ = print("\(imgToShow2)")
+            ////            Image(uiImage: imgToShow2!)
             //
+            //            let imgToShow = UIImage(named: !isDemo ?  pickedImageDataURL.path() : receivedAudioImageModel.imagePicked)
+            //            let _ = print("img to show 1...........")
+            //            let _ = print("\(imgToShow)")
             
-            let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
+            //            imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
             
-            
-            let imgToShow = UIImage(named: !isDemo ?  pickedImageDataURL.path() : receivedAudioImageModel.imagePicked)
-            
-            imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
             
             if showUI {
                 VStack {
@@ -88,7 +78,24 @@ struct CreationViewer: View {
                         
                         Spacer()
                         
-                        ShareLink(item: , preview: <#T##SharePreview<Transferable, Transferable>#>, label: <#T##() -> View#>)
+                        Text(receivedAudioImageModel.nameOfCreation)
+                            .font(.headline)
+                            .lineLimit(lineLimit)
+                            .onTapGesture {
+                                if lineLimit > 1 {
+                                    lineLimit = 1
+                                } else {
+                                    lineLimit = 5
+                                }
+                            }
+                        
+                        Spacer()
+                        
+                        ShareLink(item: getSharableData() , preview: SharePreview(receivedAudioImageModel.nameOfCreation))
+                            .foregroundStyle(.black)
+                            .font(.title2)
+                            .labelStyle(.iconOnly)
+                            .padding([.leading, .trailing], 10)
                         
                         Button {
                             print("fit")
@@ -117,7 +124,7 @@ struct CreationViewer: View {
                     //                .shadow(radius: 10)
                     
                     Spacer()
-                    if durationCheck > 0 {
+                    if publicProperties.durationTime > 0 {
                         AudioPlayer(publicProperties: publicProperties, onFront: true)
                             .backgroundStyle(Color(red: 212/255, green: 212/255, blue: 212/255))
                     }
@@ -129,6 +136,7 @@ struct CreationViewer: View {
         .background(.black)
         .onAppear {
             print("Task")
+            print(isDemo)
             //            defer {
             //                print("removing permission in creationViewer......>>,,,")
             //                publicProperties.pickedAudioDataURL!.stopAccessingSecurityScopedResource()
@@ -141,9 +149,9 @@ struct CreationViewer: View {
                 
                 pickedAudioDataURL = dir.appendingPathComponent(receivedAudioImageModel.audioPicked, conformingTo: .audio)
                 pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
-//                print(pickedImageDataURL)
-//                print(pickedAudioDataURL)
-//                print(try Data(contentsOf: pickedAudioDataURL))
+                //                print(pickedImageDataURL)
+                //                print(pickedAudioDataURL)
+                //                print(try Data(contentsOf: pickedAudioDataURL))
                 //                guard publicProperties.pickedAudioDataURL!.startAccessingSecurityScopedResource() else {
                 //                    print("cannot get permission to read audio file in creationViewer")
                 //                    return
@@ -155,16 +163,26 @@ struct CreationViewer: View {
                 //                }
                 
                 print("Before Picked audio data, creationview")
-                
-                publicProperties.pickedAudioData = try Data(contentsOf: pickedAudioDataURL!)
-                print("Picked audio data, creationview")
-                publicProperties.pickedImageData = try Data(contentsOf: pickedImageDataURL!)
-                print("Picked image data creationviewer")
-                imgDataReceived = publicProperties.pickedImageData
-                print("imgDataReceived")
-                print(imgDataReceived)
+                if !isDemo {
+                    publicProperties.pickedAudioData = try Data(contentsOf: pickedAudioDataURL!)
+                    print("Picked audio data, creationview")
+                    publicProperties.pickedImageData = try Data(contentsOf: pickedImageDataURL!)
+                    print("Picked image data creationviewer")
+                } else {
+                    let gotAudioData = NSDataAsset(name: "music")?.data
+                    let gotImageData = NSDataAsset(name: "sampleImageData")?.data
+                    publicProperties.pickedAudioData = gotAudioData!
+                    print("Picked demo audio data, creationview")
+                    
+                    publicProperties.pickedImageData = gotImageData!
+                    print("Picked demo image data creationviewer")
+                }
+                //                imgDataReceived = publicProperties.pickedImageData
+                //                print("imgDataReceived")
+                //                print(imgDataReceived)
+                //                let sampleMusicData = NSDataAsset(name: "music")?.data
                 publicProperties.audioPlayer = try AVAudioPlayer(data: publicProperties.pickedAudioData)
-                durationCheck = publicProperties.audioPlayer.duration
+//                durationCheck = publicProperties.audioPlayer.duration
                 publicProperties.durationTime = publicProperties.audioPlayer.duration
                 
                 publicProperties.setUpTimer()
@@ -196,34 +214,40 @@ struct CreationViewer: View {
         })
     }
     
-    func getSharableData() {
-        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
+    func getSharableData() -> TransferableItem {
+//        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
+//        
+//        let encoder = JSONEncoder()
+//        encoder.dateEncodingStrategy = .secondsSince1970
+//        
+//        var createdDateData: Data
+//        
+//        let separatorCode = Data([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11])
+//        
+//        var dataCreation = nameOfCreationData
+//        dataCreation.append(separatorCode)
+//        do {
+//            createdDateData = try encoder.encode(receivedAudioImageModel.createdDate)
+//            dataCreation.append(createdDateData)
+//            dataCreation.append(contentsOf: separatorCode)
+//        } catch {
+//            print("err on date encoding to data is: \(error)")
+//        }
+//        
+//        print("Appending rest.......")
+//        // imagePickedData = try Data(contentsOf: pickedImageDataURL!)
+//        dataCreation.append(publicProperties.pickedImageData)
+//        dataCreation.append(contentsOf: separatorCode)
+//        
+//        
+//        
+//        //            audioPickedData = try Data(contentsOf: pickedImageDataURL!)
+//        dataCreation.append(publicProperties.pickedAudioData)
+////        dataCreation.append(contentsOf: separatorCode)
         
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .secondsSince1970
         
-        var createdDateData: Data
-        var imagePickedData: Data
-        var audioPickedData: Data
-        do {
-            createdDateData = try encoder.encode(receivedAudioImageModel.createdDate)
-        } catch {
-            print("err on date encoding to data is: \(error)")
-        }
-        
-        do {
-            imagePickedData = try Data(contentsOf: pickedImageDataURL!)
-        } catch {
-            print("err on imagePicked to data is: \(error)")
-        }
-        
-        do {
-            audioPickedData = try Data(contentsOf: pickedImageDataURL!)
-        } catch {
-            print("err on audioPicked to data is: \(error)")
-        }
-        
-//        let imagePickedData = try Data
+        //        let imagePickedData = try Data
+        return TransferableItem(nameOfCreation: receivedAudioImageModel.nameOfCreation, imagePickedData: publicProperties.pickedImageData, audioPickedData: publicProperties.pickedAudioData, createdDate: receivedAudioImageModel.createdDate, isImported: true, importedDate: Date.now)
     }
     
     func showHideUI() {
@@ -253,7 +277,7 @@ struct CreationViewer: View {
 #Preview {
     
     //    return CreationViewer(receivedAudioImageModel: sampleModel)
-    @State var aim = AudioImageModel(nameOfCreation: "Sample name", imagePicked: "sampleImage", audioPicked: "music", createdDate: Date.now, isImported: false, importedDate: Date.now)
+    @State var aim = AudioImageModel(nameOfCreation: "Sample nameasdasdasdascasdasdasdasdasd", imagePicked: "sampleImage", audioPicked: "music", createdDate: Date.now, isImported: false, importedDate: Date.now)
     return CreationViewer(receivedAudioImageModel: aim, isDemo: true)
 }
 
