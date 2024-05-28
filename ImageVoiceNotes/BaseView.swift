@@ -143,42 +143,42 @@ extension View {
 
 
 
-#Preview {
-    //    return List {
-    //
-    //        ForEach(1...50, id: \.self) {_ in
-    //            HStack {
-    //                Image("sampleImage")
-    //                    .resizable()
-    //                    .frame(width: 50, height: 50)
-    //                    .clipShape(Circle())
-    //                    .padding([.trailing], 10)
-    //                VStack (alignment: .leading) {
-    //                    Text("hello")
-    //                        .font(.title2)
-    //                    Text("date")
-    //                        .font(.caption)
-    //                }
-    //                Spacer()
-    //                Button {
-    //                    print("play/pause")
-    //                } label: {
-    //                    Label("Play or pause on main view", systemImage: "play")
-    //                        .labelStyle(.iconOnly)
-    //                        .font(.title2)
-    //                }
-    //                .tint(.black)
-    //                .padding([.trailing])
-    //            }
-    //            .padding(5)
-    //            .background(Color(red: 248/255, green: 248/255, blue: 248/255))
-    //            .clipShape(Capsule())
-    //        }
-    //        .shadow(radius: 2)
-    //        .listRowSeparator(.hidden)
-    //
-    //    }
-    //    .listStyle(.inset)
-    
-    return BaseView()
-}
+//#Preview {
+//    //    return List {
+//    //
+//    //        ForEach(1...50, id: \.self) {_ in
+//    //            HStack {
+//    //                Image("sampleImage")
+//    //                    .resizable()
+//    //                    .frame(width: 50, height: 50)
+//    //                    .clipShape(Circle())
+//    //                    .padding([.trailing], 10)
+//    //                VStack (alignment: .leading) {
+//    //                    Text("hello")
+//    //                        .font(.title2)
+//    //                    Text("date")
+//    //                        .font(.caption)
+//    //                }
+//    //                Spacer()
+//    //                Button {
+//    //                    print("play/pause")
+//    //                } label: {
+//    //                    Label("Play or pause on main view", systemImage: "play")
+//    //                        .labelStyle(.iconOnly)
+//    //                        .font(.title2)
+//    //                }
+//    //                .tint(.black)
+//    //                .padding([.trailing])
+//    //            }
+//    //            .padding(5)
+//    //            .background(Color(red: 248/255, green: 248/255, blue: 248/255))
+//    //            .clipShape(Capsule())
+//    //        }
+//    //        .shadow(radius: 2)
+//    //        .listRowSeparator(.hidden)
+//    //
+//    //    }
+//    //    .listStyle(.inset)
+//    
+//    return BaseView()
+//}

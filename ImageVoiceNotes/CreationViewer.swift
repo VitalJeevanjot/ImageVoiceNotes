@@ -29,6 +29,9 @@ struct CreationViewer: View {
     
     @Environment (\.dismiss) private var dismiss
     
+    @State private var pickedAudioDataURL: URL?
+    @State private var pickedImageDataURL: URL?
+    
     
     var isDemo = false
     
@@ -85,6 +88,8 @@ struct CreationViewer: View {
                         
                         Spacer()
                         
+                        ShareLink(item: , preview: <#T##SharePreview<Transferable, Transferable>#>, label: <#T##() -> View#>)
+                        
                         Button {
                             print("fit")
                             withAnimation {
@@ -102,8 +107,9 @@ struct CreationViewer: View {
                         //                        .buttonStyle(.borderedProminent)
                         //                        .tint(Color(red: 212/255, green: 212/255, blue: 212/255))
                     }
-                    .padding([.leading, .trailing, .bottom])
+                    .padding()
                     .background(Color(red: 232/255, green: 232/255, blue: 232/255))
+                    //                    .padding([.leading, .trailing, .bottom])
                     
                     //            Image(uiImage: imgToShow)
                     //                .resizable()
@@ -133,11 +139,11 @@ struct CreationViewer: View {
                 print("Picked paths")
                 print(receivedAudioImageModel.audioPicked)
                 
-                let pickedAudioDataURL = dir.appendingPathComponent(receivedAudioImageModel.audioPicked, conformingTo: .audio)
-                let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
-                print(pickedImageDataURL)
-                print(pickedAudioDataURL)
-                print(try Data(contentsOf: pickedAudioDataURL))
+                pickedAudioDataURL = dir.appendingPathComponent(receivedAudioImageModel.audioPicked, conformingTo: .audio)
+                pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
+//                print(pickedImageDataURL)
+//                print(pickedAudioDataURL)
+//                print(try Data(contentsOf: pickedAudioDataURL))
                 //                guard publicProperties.pickedAudioDataURL!.startAccessingSecurityScopedResource() else {
                 //                    print("cannot get permission to read audio file in creationViewer")
                 //                    return
@@ -150,9 +156,9 @@ struct CreationViewer: View {
                 
                 print("Before Picked audio data, creationview")
                 
-                publicProperties.pickedAudioData = try Data(contentsOf: pickedAudioDataURL)
+                publicProperties.pickedAudioData = try Data(contentsOf: pickedAudioDataURL!)
                 print("Picked audio data, creationview")
-                publicProperties.pickedImageData = try Data(contentsOf: pickedImageDataURL)
+                publicProperties.pickedImageData = try Data(contentsOf: pickedImageDataURL!)
                 print("Picked image data creationviewer")
                 imgDataReceived = publicProperties.pickedImageData
                 print("imgDataReceived")
@@ -189,14 +195,44 @@ struct CreationViewer: View {
             
         })
     }
-
-func showHideUI() {
-    withAnimation {
-        showUI.toggle()
-    }
-    autoHideUIWhenNotpaused()
     
-}
+    func getSharableData() {
+        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
+        
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .secondsSince1970
+        
+        var createdDateData: Data
+        var imagePickedData: Data
+        var audioPickedData: Data
+        do {
+            createdDateData = try encoder.encode(receivedAudioImageModel.createdDate)
+        } catch {
+            print("err on date encoding to data is: \(error)")
+        }
+        
+        do {
+            imagePickedData = try Data(contentsOf: pickedImageDataURL!)
+        } catch {
+            print("err on imagePicked to data is: \(error)")
+        }
+        
+        do {
+            audioPickedData = try Data(contentsOf: pickedImageDataURL!)
+        } catch {
+            print("err on audioPicked to data is: \(error)")
+        }
+        
+//        let imagePickedData = try Data
+    }
+    
+    func showHideUI() {
+        withAnimation {
+            showUI.toggle()
+        }
+        autoHideUIWhenNotpaused()
+        
+    }
     func autoHideUIWhenNotpaused() {
         //        print(publicProperties.isPlaying)
         timer?.invalidate()
