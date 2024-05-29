@@ -21,7 +21,7 @@ struct newModel {
 
 struct BaseView: View {
     
-    @Query private var creations: [AudioImageModel]
+    @Query(sort: \AudioImageModel.createdDate, order: .reverse) private var creations: [AudioImageModel]
     
 //    @State private var creationsUpdated = [newModel]()
     
@@ -29,6 +29,8 @@ struct BaseView: View {
     //    @State private var publicProperties = PublicAudioImageProperties.shared
     //    @StateObject private var viModel = ImageProperties()
     let direc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    @Environment(\.modelContext) private var modelContext
     
     @State private var currentSelectModel: AudioImageModel?
     

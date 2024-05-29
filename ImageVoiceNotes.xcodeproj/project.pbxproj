@@ -32,6 +32,7 @@
 		B87B39B72BD8FD310070566E /* AddNewImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87B39B62BD8FD310070566E /* AddNewImage.swift */; };
 		B8A7F0F72BE6760600FD1A85 /* SampleModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */; };
 		B8C45CEF2BF6DC260099844B /* CreationViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C45CEE2BF6DC260099844B /* CreationViewer.swift */; };
+		B8DCA8462C076495008E433F /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DCA8452C076495008E433F /* SaveFile.swift */; };
 		B8F78EC52C05E0960036C350 /* TransferableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F78EC42C05E0960036C350 /* TransferableItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		B87B39B62BD8FD310070566E /* AddNewImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewImage.swift; sourceTree = "<group>"; };
 		B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SampleModelContainer.swift; path = ../SampleModelContainer.swift; sourceTree = "<group>"; };
 		B8C45CEE2BF6DC260099844B /* CreationViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationViewer.swift; sourceTree = "<group>"; };
+		B8DCA8452C076495008E433F /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		B8F78EC42C05E0960036C350 /* TransferableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferableItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +132,7 @@
 		B86C6E462BC9672500B5F991 = {
 			isa = PBXGroup;
 			children = (
+				B8DCA8452C076495008E433F /* SaveFile.swift */,
 				B82A9EDC2BFAE78A0016890D /* perItemView.swift */,
 				B86812732BE5110B00AA36F6 /* InToolbarAfterSelection.swift */,
 				B86C6E512BC9672500B5F991 /* ImageVoiceNotes */,
@@ -338,6 +341,7 @@
 				B8F78EC52C05E0960036C350 /* TransferableItem.swift in Sources */,
 				B86C6E552BC9672500B5F991 /* ContentView.swift in Sources */,
 				B8700A452BDB99880055BC38 /* AddNewAudio.swift in Sources */,
+				B8DCA8462C076495008E433F /* SaveFile.swift in Sources */,
 				B86812762BE52BF500AA36F6 /* AddAudioButton.swift in Sources */,
 				B82DD2702BF1A0850007F495 /* popoverForAudioChoice.swift in Sources */,
 				B82A9EDD2BFAE78A0016890D /* perItemView.swift in Sources */,
