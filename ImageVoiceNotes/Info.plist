@@ -5,11 +5,13 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Image song</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.jeevanjotsinghvital.imageSong</string>
+				<string>com.jeevanjotsinghvital.imagesong</string>
 			</array>
 		</dict>
 	</array>
@@ -21,19 +23,19 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
-				<string>public.content</string>
+				<string>public.item</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Image song</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.jeevanjotsinghvital.imageSong</string>
+			<string>com.jeevanjotsinghvital.imagesong</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>imageSong</string>
+					<string>imagesong</string>
 				</array>
 			</dict>
 		</dict>

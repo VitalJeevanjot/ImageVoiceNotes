@@ -10,24 +10,21 @@ import CoreTransferable
 import UniformTypeIdentifiers
 
 struct TransferableItem: Codable, Transferable {
-    var nameOfCreation: String
-    var imagePickedData: Data
-    var audioPickedData: Data
-    var createdDate: Date
-    var isImported: Bool
-    var importedDate: Date
+    var fileToShare: URL
     
-    init(nameOfCreation: String, imagePickedData: Data, audioPickedData: Data, createdDate: Date, isImported: Bool, importedDate: Date) {
-        self.nameOfCreation = nameOfCreation
-        self.imagePickedData = imagePickedData
-        self.audioPickedData = audioPickedData
-        self.createdDate = createdDate
-        self.isImported = isImported
-        self.importedDate = importedDate
+    init(fileToShare: URL) {
+        self.fileToShare = fileToShare
     }
     
     static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .imageSong)
+        FileRepresentation(contentType: .imageSong) { Transferable in
+            SentTransferredFile(Transferable.fileToShare)
+        } importing: { ReceivedTransferredFile in
+            print(">>>>>>>>>Importing<<<<<<<<<")
+            return TransferableItem(fileToShare: ReceivedTransferredFile.file)
+        }
+
+//        CodableRepresentation(contentType: .imageSong)
 //        DataRepresentation(contentType: .imageSong) { Transferable in
 //            return TransferableItem(data1: Transferable.data1, data2: Transferable.data2)
 //        } importing: { <#Data#> in
@@ -35,12 +32,21 @@ struct TransferableItem: Codable, Transferable {
 //        }
 
 //        DataRepresentation(contentType: .imageSong) { transferData in
-//            return transferData.data
+//            return transferData.fileToShare
 //        } importing: { Data in
-//            return .init(data1: Data, data2: Data)
+//            return TransferableItem(fileToShare: Data)
 //        }
 
     }
+}
+
+struct FileToSaveWith: Codable {
+    var nameOfCreation: String
+    var imagePickedData: Data
+    var audioPickedData: Data
+    var createdDate: Date
+    var isImported: Bool
+    var importedDate: Date
 }
 
 
@@ -49,6 +55,6 @@ struct TransferableItem: Codable, Transferable {
 
 extension UTType {
     static var imageSong: UTType {
-        .init(exportedAs: "com.jeevanjotsinghvital.imageSong")
+        .init(exportedAs: "com.jeevanjotsinghvital.imagesong")
     }
 }

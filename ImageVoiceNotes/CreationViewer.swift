@@ -10,6 +10,8 @@ import PDFKit
 import SwiftData
 import AVFAudio
 
+var fileCreated = false
+var sanitizedNameForShareLinkPreview = ""
 
 struct CreationViewer: View {
     //    var receivedAudioImageModel: AudioImageModel
@@ -34,8 +36,8 @@ struct CreationViewer: View {
     
     @State private var lineLimit = 1
     
-//    @State private var imagePickedData = Data()
-//    @State private var audioPickedData = Data()
+    //    @State private var imagePickedData = Data()
+    //    @State private var audioPickedData = Data()
     var isDemo = false
     
     let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -91,7 +93,15 @@ struct CreationViewer: View {
                         
                         Spacer()
                         
-                        ShareLink(item: getSharableData() , preview: SharePreview(receivedAudioImageModel.nameOfCreation))
+                        //                        ShareLink("Title", items: getSharableData()) { NewType in
+                        //                            SharePreview(sanitizedNameForShareLinkPreview)
+                        //                        }
+                        //                        .foregroundStyle(.black)
+                        //                        .font(.title2)
+                        //                        .labelStyle(.iconOnly)
+                        //                        .padding([.leading, .trailing], 10)
+                        
+                        ShareLink(item: getSharableData().fileToShare , preview: SharePreview(sanitizedNameForShareLinkPreview))
                             .foregroundStyle(.black)
                             .font(.title2)
                             .labelStyle(.iconOnly)
@@ -135,8 +145,17 @@ struct CreationViewer: View {
         }
         .background(.black)
         .onAppear {
+            fileCreated = false
             print("Task")
             print(isDemo)
+            sanitizedNameForShareLinkPreview = receivedAudioImageModel.nameOfCreation
+            sanitizedNameForShareLinkPreview.removeAll(where: { !$0.isLetter && !$0.isNumber })
+            
+            print(try! FileManager.default.contentsOfDirectory(atPath: dir.appending(path: "Exports").path))
+            //            var fileName = "KD23&*£*@)4-@1/ED"
+            //            fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
+            //            print(fileName.addingPercentEncoding(withAllowedCharacters: .letters))
+            //            print("File name-----")
             //            defer {
             //                print("removing permission in creationViewer......>>,,,")
             //                publicProperties.pickedAudioDataURL!.stopAccessingSecurityScopedResource()
@@ -182,7 +201,7 @@ struct CreationViewer: View {
                 //                print(imgDataReceived)
                 //                let sampleMusicData = NSDataAsset(name: "music")?.data
                 publicProperties.audioPlayer = try AVAudioPlayer(data: publicProperties.pickedAudioData)
-//                durationCheck = publicProperties.audioPlayer.duration
+                //                durationCheck = publicProperties.audioPlayer.duration
                 publicProperties.durationTime = publicProperties.audioPlayer.duration
                 
                 publicProperties.setUpTimer()
@@ -196,6 +215,7 @@ struct CreationViewer: View {
             autoHideUIWhenNotpaused()
         }
         .onDisappear() {
+            print("<<<<<<Dissapearing>>>>>")
             publicProperties.audioPlayer.stop()
             publicProperties.isPlaying = false
             publicProperties.audioFileSelectedAndAdded = false
@@ -215,39 +235,90 @@ struct CreationViewer: View {
     }
     
     func getSharableData() -> TransferableItem {
-//        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
-//        
-//        let encoder = JSONEncoder()
-//        encoder.dateEncodingStrategy = .secondsSince1970
-//        
-//        var createdDateData: Data
-//        
-//        let separatorCode = Data([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11])
-//        
-//        var dataCreation = nameOfCreationData
-//        dataCreation.append(separatorCode)
-//        do {
-//            createdDateData = try encoder.encode(receivedAudioImageModel.createdDate)
-//            dataCreation.append(createdDateData)
-//            dataCreation.append(contentsOf: separatorCode)
-//        } catch {
-//            print("err on date encoding to data is: \(error)")
-//        }
-//        
-//        print("Appending rest.......")
-//        // imagePickedData = try Data(contentsOf: pickedImageDataURL!)
-//        dataCreation.append(publicProperties.pickedImageData)
-//        dataCreation.append(contentsOf: separatorCode)
-//        
-//        
-//        
-//        //            audioPickedData = try Data(contentsOf: pickedImageDataURL!)
-//        dataCreation.append(publicProperties.pickedAudioData)
-////        dataCreation.append(contentsOf: separatorCode)
+        //        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
+        //
+        //        let encoder = JSONEncoder()
+        //        encoder.dateEncodingStrategy = .secondsSince1970
+        //
+        //        var createdDateData: Data
+        //
+        //        let separatorCode = Data([0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11])
+        //
+        //        var dataCreation = nameOfCreationData
+        //        dataCreation.append(separatorCode)
+        //        do {
+        //            createdDateData = try encoder.encode(receivedAudioImageModel.createdDate)
+        //            dataCreation.append(createdDateData)
+        //            dataCreation.append(contentsOf: separatorCode)
+        //        } catch {
+        //            print("err on date encoding to data is: \(error)")
+        //        }
+        //
+        //        print("Appending rest.......")
+        //        // imagePickedData = try Data(contentsOf: pickedImageDataURL!)
+        //        dataCreation.append(publicProperties.pickedImageData)
+        //        dataCreation.append(contentsOf: separatorCode)
+        //
+        //
+        //
+        //        //            audioPickedData = try Data(contentsOf: pickedImageDataURL!)
+        //        dataCreation.append(publicProperties.pickedAudioData)
+        ////        dataCreation.append(contentsOf: separatorCode)
         
         
         //        let imagePickedData = try Data
-        return TransferableItem(nameOfCreation: receivedAudioImageModel.nameOfCreation, imagePickedData: publicProperties.pickedImageData, audioPickedData: publicProperties.pickedAudioData, createdDate: receivedAudioImageModel.createdDate, isImported: true, importedDate: Date.now)
+        print("In ShareLINK....")
+        let data = FileToSaveWith(nameOfCreation: receivedAudioImageModel.nameOfCreation, imagePickedData: publicProperties.pickedImageData, audioPickedData: publicProperties.pickedAudioData, createdDate: receivedAudioImageModel.createdDate, isImported: true, importedDate: Date.now)
+        
+        var dataToWriteToFile: Data
+        
+        var fileName = receivedAudioImageModel.nameOfCreation
+        fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
+        let exportsPathURL = dir.appending(path: "Exports")
+        let filePathURL = exportsPathURL.appending(component: "\(fileName).imagesong")
+        //        print(exportsPathURL.path(percentEncoded: false))
+        if fileCreated == false {
+            do {
+                if !FileManager.default.fileExists(atPath: exportsPathURL.path) {
+                    try FileManager.default.createDirectory(atPath: exportsPathURL.path(percentEncoded: false), withIntermediateDirectories: true)
+                }
+            } catch {
+                print("err on creating directory for exporing content is: \(error)")
+            }
+            
+            
+            do {
+                if FileManager.default.fileExists(atPath: filePathURL.path) {
+                    try FileManager.default.removeItem(at: filePathURL)
+                }
+            } catch {
+                print("err on deleting file for exporing content is: \(error)")
+            }
+            
+            do {
+                dataToWriteToFile = try JSONEncoder().encode(data)
+                print("data is.......?>>>")
+                print(dataToWriteToFile)
+                
+                do {
+                    try dataToWriteToFile.write(to: filePathURL)
+                    fileCreated = true
+                } catch {
+                    print("err on writing data to file for sharelink is: \(error)")
+                }
+                
+            } catch {
+                print("err on encoding for writing to file for sharelink is: \(error)")
+            }
+        }
+        //        do { // For if Data representation
+        //            let fileData = try Data(contentsOf: filePathURL)
+        //            return [TransferableItem(fileToShare: fileData)]
+        //        } catch {
+        //            print("err reading data for Sharelink Transferable is: \(error)")
+        //        }
+        print(filePathURL)
+        return TransferableItem(fileToShare: filePathURL)
     }
     
     func showHideUI() {
