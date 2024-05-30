@@ -36,6 +36,13 @@ struct BaseView: View {
     @State private var currentSelectModel: AudioImageModel?
     
     
+    @State private var showInfoPopup = false
+    @State private var showDeleteAlert = false
+    
+    init() {
+        print("Rendering base view.......")
+    }
+    
     var body: some View {
         //        AudioRecorder()
         //        Text("hello")
@@ -47,7 +54,7 @@ struct BaseView: View {
                     ForEach(creations) {
                         item in
                         NavigationLink {
-                            CreationViewer(receivedAudioImageModel: item)
+                            CreationViewer(receivedAudioImageModel: item, showInfoPopup: $showInfoPopup, showDeleteAlert: $showDeleteAlert)
                                 .toolbar(.hidden)
                         } label: {
                                 perItemView(item: item, fileURl: direc.appendingPathComponent(item.imagePicked))

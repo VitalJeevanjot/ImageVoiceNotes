@@ -23,7 +23,7 @@ struct CreationViewer: View {
     
     @State private var disappeared = false
     
-    var publicProperties = PublicAudioImageProperties()
+    var publicProperties = PublicAudioImageProperties() // Must remain separate
     
     //    @State private var imgDataReceived = Data()
     
@@ -36,6 +36,9 @@ struct CreationViewer: View {
     
     @State private var lineLimit = 1
     
+    @Binding var showInfoPopup: Bool
+    @Binding var showDeleteAlert: Bool
+    
     //    @State private var imagePickedData = Data()
     //    @State private var audioPickedData = Data()
     var isDemo = false
@@ -43,7 +46,7 @@ struct CreationViewer: View {
     let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     var body: some View {
-        
+        let _ = print("RENDERING creation viewer......")
         ZStack {
             
             //            let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
@@ -142,6 +145,78 @@ struct CreationViewer: View {
                 }
             }
             
+            
+            Group { // Info and delete
+                if showUI {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Button {
+                                showInfoPopup = true
+                            } label: {
+                                Label("Information on creation", systemImage: "info.circle.fill")
+                                    .labelStyle(.iconOnly)
+                                    .font(.system(size: 40))
+                            }
+                            Spacer()
+                            Button {
+//                                dismiss()
+                                showDeleteAlert = true
+                            } label: {
+                                Label("Delete creation", systemImage: "xmark.bin.circle.fill")
+                                    .labelStyle(.iconOnly)
+                                    .font(.system(size: 40))
+                            }
+                            .tint(.black)
+                        }.padding()
+                    }
+                } else {
+                    let _ = print("UI FALSE......")
+                }
+            }
+        }
+        .alert("Delete \(receivedAudioImageModel.nameOfCreation) ?",isPresented: $showDeleteAlert, presenting: receivedAudioImageModel) { item in
+            AlertBeforeDeletion(item: receivedAudioImageModel, showDeletionAlert: $showDeleteAlert, direc: dir)
+        }
+        .sheet(isPresented: $showInfoPopup) {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(receivedAudioImageModel.nameOfCreation)
+                        .font(.title)
+                        Spacer()
+                        Button {
+                            showInfoPopup = false
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title3)
+                        }
+                }.padding([.bottom], 15)
+                Group {
+                    Text("Imported")
+                        .fontWeight(.bold)
+                    Text("\(receivedAudioImageModel.isImported)")
+                        .padding([.bottom], 15)
+                }
+//                    .padding()
+                
+                if receivedAudioImageModel.isImported {
+                    Group {
+                        Text("Imported Date")
+                            .fontWeight(.bold)
+                        Text("\(receivedAudioImageModel.importedDate!)")
+                            .padding([.bottom], 15)
+                    }
+                        
+
+                } else {
+                    Group {
+                        Text("Created Date")
+                            .fontWeight(.bold)
+                        Text("\(receivedAudioImageModel.createdDate)")
+                            .padding([.bottom], 15)
+                    }
+                }
+            }.padding()
         }
         .background(.black)
         .onAppear {
@@ -152,7 +227,7 @@ struct CreationViewer: View {
             sanitizedNameForShareLinkPreview = receivedAudioImageModel.nameOfCreation
             sanitizedNameForShareLinkPreview.removeAll(where: { !$0.isLetter && !$0.isNumber })
             
-//            print(try! FileManager.default.contentsOfDirectory(atPath: dir.appending(path: "Exports").path))
+            //            print(try! FileManager.default.contentsOfDirectory(atPath: dir.appending(path: "Exports").path))
             
             //            var fileName = "KD23&*£*@)4-@1/ED"
             //            fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
@@ -219,7 +294,7 @@ struct CreationViewer: View {
             // Start auto play audio on full screen
             publicProperties.audioPlayer.play()
             publicProperties.isPlaying = true
-
+            
         }
         .onDisappear() {
             print("<<<<<<Dissapearing>>>>>")
@@ -282,7 +357,7 @@ struct CreationViewer: View {
             }
         }
         
-        print("In ShareLINK....")
+//        print("In ShareLINK....")
         let data = FileToSaveWith(nameOfCreation: receivedAudioImageModel.nameOfCreation, imagePickedData: publicProperties.pickedImageData, audioPickedData: publicProperties.pickedAudioData, createdDate: receivedAudioImageModel.createdDate, isImported: true, importedDate: Date.now)
         
         var dataToWriteToFile: Data
@@ -312,8 +387,8 @@ struct CreationViewer: View {
             
             do {
                 dataToWriteToFile = try JSONEncoder().encode(data)
-                print("data is.......?>>>")
-                print(dataToWriteToFile)
+//                print("data is.......?>>>")
+//                print(dataToWriteToFile)
                 
                 do {
                     try dataToWriteToFile.write(to: filePathURL)
@@ -332,7 +407,7 @@ struct CreationViewer: View {
         //        } catch {
         //            print("err reading data for Sharelink Transferable is: \(error)")
         //        }
-        print(filePathURL)
+//        print(filePathURL)
         return TransferableItem(fileToShare: filePathURL)
     }
     
@@ -364,7 +439,7 @@ struct CreationViewer: View {
     
     //    return CreationViewer(receivedAudioImageModel: sampleModel)
     @State var aim = AudioImageModel(nameOfCreation: "Sample nameasdasdasdascasdasdasdasdasd", imagePicked: "sampleImage", audioPicked: "music", createdDate: Date.now, isImported: false, importedDate: Date.now)
-    return CreationViewer(receivedAudioImageModel: aim, isDemo: true)
+    return CreationViewer(receivedAudioImageModel: aim, showInfoPopup: .constant(false), showDeleteAlert: .constant(false), isDemo: true)
 }
 
 

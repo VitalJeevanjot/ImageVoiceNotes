@@ -31,6 +31,7 @@
 		B8783EE82BD636A200F9FE55 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783EE72BD636A200F9FE55 /* BaseView.swift */; };
 		B87B39B72BD8FD310070566E /* AddNewImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87B39B62BD8FD310070566E /* AddNewImage.swift */; };
 		B8A7F0F72BE6760600FD1A85 /* SampleModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */; };
+		B8BACFE32C08D23B004F750F /* AlertBeforeDeletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BACFE22C08D23B004F750F /* AlertBeforeDeletion.swift */; };
 		B8C45CEF2BF6DC260099844B /* CreationViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C45CEE2BF6DC260099844B /* CreationViewer.swift */; };
 		B8DCA8462C076495008E433F /* SaveFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8DCA8452C076495008E433F /* SaveFile.swift */; };
 		B8F78EC52C05E0960036C350 /* TransferableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F78EC42C05E0960036C350 /* TransferableItem.swift */; };
@@ -83,6 +84,7 @@
 		B8783EE92BD64CD200F9FE55 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B87B39B62BD8FD310070566E /* AddNewImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewImage.swift; sourceTree = "<group>"; };
 		B8A7F0F62BE6760600FD1A85 /* SampleModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SampleModelContainer.swift; path = ../SampleModelContainer.swift; sourceTree = "<group>"; };
+		B8BACFE22C08D23B004F750F /* AlertBeforeDeletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBeforeDeletion.swift; sourceTree = "<group>"; };
 		B8C45CEE2BF6DC260099844B /* CreationViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationViewer.swift; sourceTree = "<group>"; };
 		B8DCA8452C076495008E433F /* SaveFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFile.swift; sourceTree = "<group>"; };
 		B8F78EC42C05E0960036C350 /* TransferableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferableItem.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				B8DCA8452C076495008E433F /* SaveFile.swift */,
 				B82A9EDC2BFAE78A0016890D /* perItemView.swift */,
+				B8BACFE22C08D23B004F750F /* AlertBeforeDeletion.swift */,
 				B86812732BE5110B00AA36F6 /* InToolbarAfterSelection.swift */,
 				B86C6E512BC9672500B5F991 /* ImageVoiceNotes */,
 				B86C6E642BC9672600B5F991 /* ImageVoiceNotesTests */,
@@ -356,6 +359,7 @@
 				B86C6E572BC9672500B5F991 /* Item.swift in Sources */,
 				B8A7F0F72BE6760600FD1A85 /* SampleModelContainer.swift in Sources */,
 				B85FFFA72BDFDAE200D95954 /* PublicAudioImageProperties.swift in Sources */,
+				B8BACFE32C08D23B004F750F /* AlertBeforeDeletion.swift in Sources */,
 				B86C6E532BC9672500B5F991 /* ImageVoiceNotesApp.swift in Sources */,
 				B8783EE82BD636A200F9FE55 /* BaseView.swift in Sources */,
 				B86DBE912BDAB6E800C25322 /* ContentCreationViewer.swift in Sources */,

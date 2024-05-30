@@ -35,6 +35,7 @@ import AVFAudio
     
     var requiresSave = false
     
+    
     @ObservationIgnored var audioPlayer = AVAudioPlayer()
     
     @ObservationIgnored var pickedAudioData = Data()

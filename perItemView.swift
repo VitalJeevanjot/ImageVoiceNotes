@@ -43,30 +43,7 @@ struct perItemView: View {
             .background(Color(red: 248/255, green: 248/255, blue: 248/255))
             .clipShape(Capsule())
             .alert("Delete \(item.nameOfCreation) ?",isPresented: $showDeletionAlert, presenting: item) { item in
-                Button(role: .cancel) {
-                    showDeletionAlert = false
-                } label: {
-                    Text("Cancel")
-                }
-                
-                Button(role: .destructive) {
-                    do {
-                        try FileManager.default.removeItem(at: direc.appending(path: item.audioPicked))
-                    } catch {
-                        print("err while deleting audio file is: \(error)")
-                    }
-                    
-                    do {
-                        try FileManager.default.removeItem(at: direc.appending(path: item.imagePicked))
-                    } catch {
-                        print("err while deleting image file is: \(error)")
-                    }
-                    modelContext.delete(item)
-                    showDeletionAlert = false
-                } label: {
-                    Text("Delete")
-                }
-
+                AlertBeforeDeletion(item: item, showDeletionAlert: $showDeletionAlert, direc: direc)
             }
             
         }
