@@ -113,6 +113,7 @@ struct buttonImageView: View {
     var fileURl: URL
     var creationName: String
     var creationTime: Date
+    let imported: Bool
     let dateFormatter = DateFormatter()
     var body: some View {
         dateFormatter.timeZone = TimeZone.current
@@ -127,8 +128,16 @@ struct buttonImageView: View {
                 .padding([.trailing], 10)
             
             VStack (alignment: .leading) {
-                Text(creationName)
-                    .font(.title2)
+                HStack {
+                    Text(creationName)
+                        .font(.title2)
+                        .lineLimit(1)
+                    Spacer()
+                    if imported {
+                        Image(systemName: "square.and.arrow.down")
+                            .font(.caption)
+                    }
+                }
                 Text(dateFormatter.string(from: creationTime))
                     .font(.caption)
             }

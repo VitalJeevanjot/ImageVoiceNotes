@@ -19,7 +19,7 @@ struct perItemView: View {
         //                            let _ = print("File path on checkl..... \(fileURl.path())")
         Group {
             HStack {
-                buttonImageView(fileURl: fileURl, creationName: item.nameOfCreation, creationTime: item.createdDate)
+                buttonImageView(fileURl: fileURl, creationName: item.nameOfCreation, creationTime: item.createdDate, imported: item.isImported)
                 
                 Spacer()
                 Button {
