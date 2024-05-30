@@ -23,8 +23,12 @@ struct MainPlayerButtonAndScreen: View {
         Button {
             print("Main play")
             publicProperties.playOnFullScreen = true
-            appearUI = true
+            appearUI = false
             closed = false
+            
+            // Start auto play audio on full screen
+            publicProperties.audioPlayer.play()
+            publicProperties.isPlaying = true
         } label: {
             Image(systemName: "play.rectangle.on.rectangle.circle.fill")
                 .frame(width: 80, height: 70)

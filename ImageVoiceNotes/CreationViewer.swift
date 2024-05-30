@@ -146,6 +146,7 @@ struct CreationViewer: View {
         .background(.black)
         .onAppear {
             fileCreated = false
+            showUI = false
             print("Task")
             print(isDemo)
             sanitizedNameForShareLinkPreview = receivedAudioImageModel.nameOfCreation
@@ -213,6 +214,11 @@ struct CreationViewer: View {
                 print("Audio data not loaded on creation view err is: \(error)")
             }
             autoHideUIWhenNotpaused()
+            
+            // Start auto play audio on full screen
+            publicProperties.audioPlayer.play()
+            publicProperties.isPlaying = true
+
         }
         .onDisappear() {
             print("<<<<<<Dissapearing>>>>>")
