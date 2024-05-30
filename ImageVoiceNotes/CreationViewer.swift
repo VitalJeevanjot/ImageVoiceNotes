@@ -152,7 +152,8 @@ struct CreationViewer: View {
             sanitizedNameForShareLinkPreview = receivedAudioImageModel.nameOfCreation
             sanitizedNameForShareLinkPreview.removeAll(where: { !$0.isLetter && !$0.isNumber })
             
-            print(try! FileManager.default.contentsOfDirectory(atPath: dir.appending(path: "Exports").path))
+//            print(try! FileManager.default.contentsOfDirectory(atPath: dir.appending(path: "Exports").path))
+            
             //            var fileName = "KD23&*£*@)4-@1/ED"
             //            fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
             //            print(fileName.addingPercentEncoding(withAllowedCharacters: .letters))
@@ -273,6 +274,14 @@ struct CreationViewer: View {
         
         
         //        let imagePickedData = try Data
+        if FileManager.default.fileExists(atPath: dir.appending(path: "Exports").path) {
+            do {
+                try FileManager.default.removeItem(at: dir.appending(path: "Exports"))
+            } catch {
+                print("err on removing exports directory at sharelink start is: \(error)")
+            }
+        }
+        
         print("In ShareLINK....")
         let data = FileToSaveWith(nameOfCreation: receivedAudioImageModel.nameOfCreation, imagePickedData: publicProperties.pickedImageData, audioPickedData: publicProperties.pickedAudioData, createdDate: receivedAudioImageModel.createdDate, isImported: true, importedDate: Date.now)
         

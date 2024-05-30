@@ -22,6 +22,8 @@ struct newModel {
 struct BaseView: View {
     
     @Query(sort: \AudioImageModel.createdDate, order: .reverse) private var creations: [AudioImageModel]
+    @Environment(\.modelContext) private var modelContext
+
     
 //    @State private var creationsUpdated = [newModel]()
     
@@ -30,7 +32,6 @@ struct BaseView: View {
     //    @StateObject private var viModel = ImageProperties()
     let direc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
-    @Environment(\.modelContext) private var modelContext
     
     @State private var currentSelectModel: AudioImageModel?
     
@@ -86,6 +87,9 @@ struct BaseView: View {
             Text("Selected items")
         }
         .tint(.black)
+//        .task(priority: .high, {
+//
+//        })
 //        .task {
 //            creationsUpdated = creations.map {
 //                return newModel(nameOfCreation: $0.nameOfCreation, imagePicked: $0.imagePicked, audioPicked: $0.audioPicked, createdDate: $0.createdDate, isImported: $0.isImported, isPlaying: false)
