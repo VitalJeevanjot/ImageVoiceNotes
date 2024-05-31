@@ -39,15 +39,18 @@ struct perItemView: View {
                 .tint(.black)
                 .padding([.trailing])
             }
-            .padding(5)
+            .padding(10)
             .background(Color(red: 248/255, green: 248/255, blue: 248/255))
             .clipShape(Capsule())
+            .overlay {
+                Capsule().strokeBorder(.brown, lineWidth: 2)
+            }
             .alert("Delete \(item.nameOfCreation) ?",isPresented: $showDeletionAlert, presenting: item) { item in
                 AlertBeforeDeletion(item: item, showDeletionAlert: $showDeletionAlert, direc: direc)
             }
             
         }
-        .padding(5)
+        .padding(6)
 
     }
     

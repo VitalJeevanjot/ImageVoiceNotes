@@ -45,46 +45,59 @@ struct BaseView: View {
         //        let _ = loadAudio()
         
         NavigationSplitView {
-            creationsViewer(searchText: searchText)
-                .padding(10)
-
-                .toolbar {
-//                    ToolbarItem {
-                        HStack {
-                            TextField("Search", text: $searchText)
-                                .padding(5)
-                                .background(Color(red: 242/255, green: 242/255, blue: 242/255))
-                                .clipShape(.rect(cornerRadius: 8))
-                                .frame(width:200)
+            VStack(spacing: 0) {
+                HStack {
+                    TextField("Search", text: $searchText)
+                        .padding(5)
+                        .background(Color(red: 242/255, green: 242/255, blue: 242/255))
+                        .clipShape(.rect(cornerRadius: 8))
+                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(.brown, lineWidth: 2))
+//                                .frame(width:200)
 //                                .fixedSize(horizontal: true, vertical: true)
-                            
-                            NavigationLink {
-                                ContentCreationViewer()
-                                    .navigationBarBackButtonHidden(true)
-                            } label: {
-                                HStack {
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 20))
-                                        .padding(4.0)
-                                        .background(.black)
-                                        .clipShape(.rect(cornerRadius: 8))
-                                        .tint(.accent)
-                                }
-                                
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(10)
-                        
-//                    }
                     
+                    NavigationLink {
+                        ContentCreationViewer()
+                            .navigationBarBackButtonHidden(true)
+                    } label: {
+                        HStack {
+                            Image(systemName: "plus")
+                                .font(.title)
+                                .padding(4.0)
+                                .background(.black)
+                                .clipShape(.rect(cornerRadius: 8))
+                                .tint(.accent)
+                                .overlay(RoundedRectangle(cornerRadius: 4).stroke(.white, lineWidth: 2))
+                        }
+                        
+                    }
                 }
-                .toolbarBackground(.white, for: .navigationBar)
+                .padding([.trailing, .leading],25)
+                .padding([.bottom], 10)
+                .background(Color(red: 235/255, green: 235/255, blue: 235/255))
+                
+                creationsViewer(searchText: searchText)
+//                    .padding([.leading, .trailing],10)
+            }
+//                .background(.black)
+
+//                .toolbar {
+//                   
+////                    ToolbarItem {
+////                        
+//////                        .frame(maxWidth: .infinity)
+//////                        .background(.green)
+////                        
+////                    }
+//                    
+//                }
+//                .toolbarBackground(Color(red: 242/255, green: 242/255, blue: 242/255), for: .navigationBar)
             
         } detail: {
             Text("Selected items")
         }
         .tint(.black)
+//        .navigationBarTitleDisplayMode(.inline)
+//        .padding(0)
 //        .searchable(text: $searchText)
 
         
@@ -133,19 +146,25 @@ struct creationsViewer: View {
     }
     
     var body: some View {
+//        List {
+
         ScrollView(showsIndicators: false) {
             ForEach(creations) {
                 item in
                 NavigationLink {
                     CreationViewer(receivedAudioImageModel: item, showInfoPopup: $showInfoPopup, showDeleteAlert: $showDeleteAlert)
                         .toolbar(.hidden)
+                        
                 } label: {
                     perItemView(item: item, fileURl: direc.appendingPathComponent(item.imagePicked))
                 }
             }
-            .shadow(radius: 2)
-            .listRowSeparator(.hidden)
-        }.listSectionSeparator(.hidden)
+            .padding([.top], 10)
+//            .background(.black)
+//            .shadow(radius: 2)
+//            .listRowSeparator(.hidden)
+//         }.listSectionSeparator(.hidden)
+        }
         
     }
 }

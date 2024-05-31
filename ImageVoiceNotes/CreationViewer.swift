@@ -80,8 +80,8 @@ struct CreationViewer: View {
                             }
                         }
                         .foregroundStyle(.black)
+                        .padding([.trailing], 25)
                         
-                        Spacer()
                         
                         Text(receivedAudioImageModel.nameOfCreation)
                             .font(.headline)
@@ -93,6 +93,8 @@ struct CreationViewer: View {
                                     lineLimit = 5
                                 }
                             }
+                        
+                        
                         
                         Spacer()
                         
