@@ -160,6 +160,7 @@ struct creationsViewer: View {
                 }
             }
             .padding([.top], 10)
+            .padding([.trailing, .leading], 4)
 //            .background(.black)
 //            .shadow(radius: 2)
 //            .listRowSeparator(.hidden)

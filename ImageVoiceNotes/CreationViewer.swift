@@ -82,6 +82,7 @@ struct CreationViewer: View {
                         .foregroundStyle(.black)
                         .padding([.trailing], 25)
                         
+                        Spacer()
                         
                         Text(receivedAudioImageModel.nameOfCreation)
                             .font(.headline)
@@ -93,7 +94,6 @@ struct CreationViewer: View {
                                     lineLimit = 5
                                 }
                             }
-                        
                         
                         
                         Spacer()
@@ -129,7 +129,8 @@ struct CreationViewer: View {
                         //                        .buttonStyle(.borderedProminent)
                         //                        .tint(Color(red: 212/255, green: 212/255, blue: 212/255))
                     }
-                    .padding()
+                    .padding(8)
+                    .padding([.leading, .trailing], 7)
                     .background(Color(red: 232/255, green: 232/255, blue: 232/255))
                     //                    .padding([.leading, .trailing, .bottom])
                     
