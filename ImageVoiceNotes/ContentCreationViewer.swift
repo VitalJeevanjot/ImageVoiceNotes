@@ -88,12 +88,12 @@ struct ContentCreationViewer: View {
                 showBackButtonAlert = false
                 dismiss()
             } label: {
-                Text("main page")
+                Text("yes")
             }
             Button(role: .cancel) {
                 showBackButtonAlert = false
             } label: {
-                Text("current")
+                Text("no")
             }
         })
         .onDisappear(perform: {
