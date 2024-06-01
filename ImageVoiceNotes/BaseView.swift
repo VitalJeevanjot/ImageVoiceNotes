@@ -35,18 +35,17 @@ struct BaseView: View {
     
     @State private var searchText = ""
     
-    @State private var navPath: [AudioImageModel] = []
+    @Binding var navPath: [AudioImageModel]
     
-    init() {
-        print("Rendering base view.......")
-    }
+//    init() {
+//        print("Rendering base view.......")
+//    }
     
     var body: some View {
         //        AudioRecorder()
         //        Text("hello")
         //        let _ = loadAudio()
-        
-//        NavigationStack(path: $navPath) 
+//        NavigationStack(path: $navPath)
         NavigationStack(path: $navPath){
             VStack(spacing: 0) {
                 HStack {
@@ -172,7 +171,6 @@ struct creationsViewer: View {
         }
         .navigationDestination(for: AudioImageModel.self) { Dest in
             CreationViewer(receivedAudioImageModel: Dest)
-                .toolbar(.hidden)
         }
         
     }

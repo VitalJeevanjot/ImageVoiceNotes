@@ -10,23 +10,31 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \AudioImageModel.createdDate, order: .reverse) private var creations: [AudioImageModel]
+    @Query private var creations: [AudioImageModel] // for validating audio/image files in documents with swiftData entities saved.
+//    @Environment (\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
     let direc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
 
     
     @State private var nowShowView = false
+    
+    @State private var navPath: [AudioImageModel] = []
+    
+    @State private var pathItemToAppend: AudioImageModel?
 //    @Query private var items: [Item]
     var body: some View {
 //        CreationViewer()
+//        let _ = print(direc)
+
         Group {
             if nowShowView {
                 
-                BaseView()
+                BaseView(navPath: $navPath)
                     .preferredColorScheme(.light)
                     .onOpenURL(perform: { url in
                         if url.pathExtension == "imagesong" {
-                            print("url is....")
-                            print(url)
+//                            print("url is....")
+//                            print(url)
                             defer {
                                 url.stopAccessingSecurityScopedResource()
                             }
@@ -41,7 +49,7 @@ struct ContentView: View {
                                 do {
                                     let decoder = JSONDecoder()
                                     let jsonReceived = try decoder.decode(FileToSaveWith.self, from: receivedData)
-                                    print(jsonReceived)
+//                                    print(jsonReceived)
                                     
                                     let audioData = jsonReceived.audioPickedData
                                     let imageData = jsonReceived.imagePickedData
@@ -55,6 +63,13 @@ struct ContentView: View {
                                     // Imported date same as created date for reasons to keep sorting order correct in base view by date....
                                     
                                     modelContext.insert(dataToSave)
+                                    do {
+                                        try modelContext.save()
+                                    } catch {
+                                        print("err while saving imported data to SwiftUI is: \(error)")
+                                    }
+                                    
+                                    pathItemToAppend = dataToSave
                                     
                                 } catch {
                                     print("Err while decoding fetched data from imported file is: \(error)")
@@ -83,6 +98,21 @@ struct ContentView: View {
             nowShowView = true
             
         })
+        .onChange(of: scenePhase) { old, newPhase in
+            if newPhase == .active {
+                print("PHASE ___ Active!!")
+                if pathItemToAppend != nil {
+                    navPath.append(pathItemToAppend!)
+                }
+            }
+            if newPhase == .inactive {
+                print("PHASE ___ Inactive!!")
+                navPath.removeAll()
+            }
+            if newPhase == .background {
+                print("PHASE ___ Background!!")
+            }
+        }
 //        AudioRecorder()
 //        NavigationSplitView {
 //            List {

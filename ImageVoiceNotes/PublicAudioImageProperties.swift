@@ -46,7 +46,7 @@ import AVFAudio
     
     func setUpTimer() {
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { Timer in
-            print("1/2 seconds passed")
+//            print("1/2 seconds passed")
             self.updateCurrentTime()
         }
         

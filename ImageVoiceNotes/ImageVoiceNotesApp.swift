@@ -28,6 +28,7 @@ struct ImageVoiceNotesApp: App {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+        
 //        .modelContainer(SampleModelContainer.shared.modelContainer)
     }
 }

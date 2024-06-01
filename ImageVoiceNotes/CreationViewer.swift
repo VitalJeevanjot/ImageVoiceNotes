@@ -44,7 +44,7 @@ struct CreationViewer: View {
     let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     var body: some View {
-        let _ = print("RENDERING creation viewer......")
+//        let _ = print("RENDERING creation viewer......")
         ZStack {
             
             //            let pickedImageDataURL = dir.appendingPathComponent(receivedAudioImageModel.imagePicked, conformingTo: .image)
@@ -174,11 +174,13 @@ struct CreationViewer: View {
                             .tint(.black)
                         }.padding()
                     }
-                } else {
-                    let _ = print("UI FALSE......")
-                }
+                } 
+//                else {
+//                    let _ = print("UI FALSE......")
+//                }
             }
         }
+        .toolbar(.hidden)
         .alert("Delete \(receivedAudioImageModel.nameOfCreation) ?",isPresented: $showDeleteAlert, presenting: receivedAudioImageModel) { item in
             AlertBeforeDeletion(item: receivedAudioImageModel, showDeletionAlert: $showDeleteAlert, direc: dir)
         }
@@ -224,6 +226,7 @@ struct CreationViewer: View {
         }
         .background(.black)
         .onAppear {
+//            dissapearingActions()
             fileCreated = false
             showUI = false
             print("Task")
@@ -262,20 +265,20 @@ struct CreationViewer: View {
                 //                    return
                 //                }
                 
-                print("Before Picked audio data, creationview")
+//                print("Before Picked audio data, creationview")
                 if !isDemo {
                     publicProperties.pickedAudioData = try Data(contentsOf: pickedAudioDataURL!)
-                    print("Picked audio data, creationview")
+//                    print("Picked audio data, creationview")
                     publicProperties.pickedImageData = try Data(contentsOf: pickedImageDataURL!)
-                    print("Picked image data creationviewer")
+//                    print("Picked image data creationviewer")
                 } else {
                     let gotAudioData = NSDataAsset(name: "music")?.data
                     let gotImageData = NSDataAsset(name: "sampleImageData")?.data
                     publicProperties.pickedAudioData = gotAudioData!
-                    print("Picked demo audio data, creationview")
+//                    print("Picked demo audio data, creationview")
                     
                     publicProperties.pickedImageData = gotImageData!
-                    print("Picked demo image data creationviewer")
+//                    print("Picked demo image data creationviewer")
                 }
                 //                imgDataReceived = publicProperties.pickedImageData
                 //                print("imgDataReceived")
@@ -301,11 +304,7 @@ struct CreationViewer: View {
             
         }
         .onDisappear() {
-            print("<<<<<<Dissapearing>>>>>")
-            publicProperties.audioPlayer.stop()
-            publicProperties.isPlaying = false
-            publicProperties.audioFileSelectedAndAdded = false
-            publicProperties.isReadyToPlayFull = false
+            dissapearingActions()
         }
         
 //        .onTapGesture {
@@ -319,8 +318,16 @@ struct CreationViewer: View {
             
         })
     }
+    func dissapearingActions() {
+//        print("<<<<<<Dissapearing>>>>>")
+        publicProperties.audioPlayer.stop()
+        publicProperties.isPlaying = false
+        publicProperties.audioFileSelectedAndAdded = false
+        publicProperties.isReadyToPlayFull = false
+    }
     
     func getSharableData() -> TransferableItem {
+//        print("Sharable....")
         //        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
         //
         //        let encoder = JSONEncoder()
