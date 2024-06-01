@@ -47,7 +47,7 @@ struct BaseView: View {
         //        let _ = loadAudio()
         
 //        NavigationStack(path: $navPath) 
-        NavigationSplitView{
+        NavigationStack(path: $navPath){
             VStack(spacing: 0) {
                 HStack {
                     TextField("Search", text: $searchText)
@@ -96,10 +96,10 @@ struct BaseView: View {
 //                .toolbarBackground(Color(red: 242/255, green: 242/255, blue: 242/255), for: .navigationBar)
             
         }
-    detail: {
-        Text("Selected items")
-    }
         .tint(.black)
+//    detail: {
+//        Text("Selected items")
+//    }
 //        .navigationBarTitleDisplayMode(.inline)
 //        .padding(0)
 //        .searchable(text: $searchText)
@@ -152,13 +152,16 @@ struct creationsViewer: View {
         ScrollView(showsIndicators: false) {
             ForEach(creations) {
                 item in
-                NavigationLink {
-                    CreationViewer(receivedAudioImageModel: item)
-                        .toolbar(.hidden)
-                        
-                } label: {
+                NavigationLink(value: item) {
                     perItemView(item: item, fileURl: direc.appendingPathComponent(item.imagePicked))
                 }
+//                NavigationLink {
+//                    CreationViewer(receivedAudioImageModel: item)
+//                        .toolbar(.hidden)
+//                        
+//                } label: {
+//                    perItemView(item: item, fileURl: direc.appendingPathComponent(item.imagePicked))
+//                }
             }
             .padding([.top], 10)
             .padding([.trailing, .leading], 4)
@@ -167,10 +170,10 @@ struct creationsViewer: View {
 //            .listRowSeparator(.hidden)
 //         }.listSectionSeparator(.hidden)
         }
-//        .navigationDestination(for: AudioImageModel.self) { Dest in
-//            CreationViewer(receivedAudioImageModel: Dest, showInfoPopup: $showInfoPopup, showDeleteAlert: $showDeleteAlert)
-//                .toolbar(.hidden)
-//        }
+        .navigationDestination(for: AudioImageModel.self) { Dest in
+            CreationViewer(receivedAudioImageModel: Dest)
+                .toolbar(.hidden)
+        }
         
     }
 }
