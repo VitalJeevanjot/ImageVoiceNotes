@@ -35,6 +35,8 @@ struct BaseView: View {
     
     @State private var searchText = ""
     
+    @State private var navPath: [AudioImageModel] = []
+    
     init() {
         print("Rendering base view.......")
     }
@@ -44,7 +46,8 @@ struct BaseView: View {
         //        Text("hello")
         //        let _ = loadAudio()
         
-        NavigationSplitView {
+//        NavigationStack(path: $navPath) 
+        NavigationSplitView{
             VStack(spacing: 0) {
                 HStack {
                     TextField("Search", text: $searchText)
@@ -92,9 +95,10 @@ struct BaseView: View {
 //                }
 //                .toolbarBackground(Color(red: 242/255, green: 242/255, blue: 242/255), for: .navigationBar)
             
-        } detail: {
-            Text("Selected items")
         }
+    detail: {
+        Text("Selected items")
+    }
         .tint(.black)
 //        .navigationBarTitleDisplayMode(.inline)
 //        .padding(0)
@@ -130,9 +134,6 @@ struct BaseView: View {
 struct creationsViewer: View {
     @Query var creations: [AudioImageModel]
     
-    @State private var showInfoPopup = false
-    @State private var showDeleteAlert = false
-    
     let direc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
     init(searchText: String) {
@@ -152,7 +153,7 @@ struct creationsViewer: View {
             ForEach(creations) {
                 item in
                 NavigationLink {
-                    CreationViewer(receivedAudioImageModel: item, showInfoPopup: $showInfoPopup, showDeleteAlert: $showDeleteAlert)
+                    CreationViewer(receivedAudioImageModel: item)
                         .toolbar(.hidden)
                         
                 } label: {
@@ -166,6 +167,10 @@ struct creationsViewer: View {
 //            .listRowSeparator(.hidden)
 //         }.listSectionSeparator(.hidden)
         }
+//        .navigationDestination(for: AudioImageModel.self) { Dest in
+//            CreationViewer(receivedAudioImageModel: Dest, showInfoPopup: $showInfoPopup, showDeleteAlert: $showDeleteAlert)
+//                .toolbar(.hidden)
+//        }
         
     }
 }

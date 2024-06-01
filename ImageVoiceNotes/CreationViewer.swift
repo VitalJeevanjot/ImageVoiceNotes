@@ -36,11 +36,9 @@ struct CreationViewer: View {
     
     @State private var lineLimit = 1
     
-    @Binding var showInfoPopup: Bool
-    @Binding var showDeleteAlert: Bool
-    
-    //    @State private var imagePickedData = Data()
-    //    @State private var audioPickedData = Data()
+    @State private var showInfoPopup = false
+    @State private var showDeleteAlert = false
+
     var isDemo = false
     
     let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -55,6 +53,9 @@ struct CreationViewer: View {
             //            let imgToShow = UIImage(data: imgDataReceived)
             if let imgToShow = UIImage(data: publicProperties.pickedImageData) {
                 imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
+                    .onTapGesture {
+                        showHideUI()
+                    }
             }
             //            let imgToShow = UIImage(named: !isDemo ?  pickedImageDataURL.path() : receivedAudioImageModel.imagePicked)
             //            let _ = print("img to show 2...........")
@@ -307,9 +308,9 @@ struct CreationViewer: View {
             publicProperties.isReadyToPlayFull = false
         }
         
-        .onTapGesture {
-            showHideUI()
-        }
+//        .onTapGesture {
+//            showHideUI()
+//        }
         //        .ignoresSafeArea()
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
             pdfView.scaleFactor = pdfView.scaleFactorForSizeToFit
@@ -442,7 +443,7 @@ struct CreationViewer: View {
     
     //    return CreationViewer(receivedAudioImageModel: sampleModel)
     @State var aim = AudioImageModel(nameOfCreation: "Sample nameasdasdasdascasdasdasdasdasd", imagePicked: "sampleImage", audioPicked: "music", createdDate: Date.now, isImported: false, importedDate: Date.now)
-    return CreationViewer(receivedAudioImageModel: aim, showInfoPopup: .constant(false), showDeleteAlert: .constant(false), isDemo: true)
+    return CreationViewer(receivedAudioImageModel: aim, isDemo: true)
 }
 
 

@@ -35,7 +35,14 @@ struct AudioPlayer: View {
                         Text("\(componentFormatter.string(from: publicProperties.currentTime) ?? "00:00")")
                     } maximumValueLabel: {
                         Text("\(componentFormatter.string(from: publicProperties.durationTime) ?? "00:00")")
+                    } onEditingChanged: {
+                        val in
+                        publicProperties.currentTime = publicProperties.audioPlayer.currentTime
+                        publicProperties.audioPlayer.stop()
+                        publicProperties.isPlaying = false
+                        
                     }
+                    
                     //                onEditingChanged: {
                     //                    editedVal in
                     //                    edited = true
