@@ -100,17 +100,17 @@ struct ContentView: View {
         })
         .onChange(of: scenePhase) { old, newPhase in
             if newPhase == .active {
-                print("PHASE ___ Active!!")
+//                print("PHASE ___ Active!!")
                 if pathItemToAppend != nil {
                     navPath.append(pathItemToAppend!)
                 }
             }
             if newPhase == .inactive {
-                print("PHASE ___ Inactive!!")
+//                print("PHASE ___ Inactive!!")
                 navPath.removeAll()
             }
             if newPhase == .background {
-                print("PHASE ___ Background!!")
+//                print("PHASE ___ Background!!")
             }
         }
 //        AudioRecorder()

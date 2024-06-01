@@ -38,6 +38,8 @@ struct CreationViewer: View {
     
     @State private var showInfoPopup = false
     @State private var showDeleteAlert = false
+    
+    @State private var transferableItem: TransferableItem?
 
     var isDemo = false
     
@@ -106,12 +108,13 @@ struct CreationViewer: View {
                         //                        .font(.title2)
                         //                        .labelStyle(.iconOnly)
                         //                        .padding([.leading, .trailing], 10)
-                        
-                        ShareLink(item: getSharableData().fileToShare , preview: SharePreview(sanitizedNameForShareLinkPreview))
-                            .foregroundStyle(.black)
-                            .font(.title2)
-                            .labelStyle(.iconOnly)
-                            .padding([.leading, .trailing], 10)
+                        if transferableItem != nil {
+                            ShareLink(item: transferableItem!.fileToShare , preview: SharePreview(sanitizedNameForShareLinkPreview))
+                                .foregroundStyle(.black)
+                                .font(.title2)
+                                .labelStyle(.iconOnly)
+                                .padding([.leading, .trailing], 10)
+                        }
                         
                         Button {
                             print("fit")
@@ -293,6 +296,8 @@ struct CreationViewer: View {
                 publicProperties.audioPlayer.delegate = publicProperties
                 publicProperties.isReadyToPlayFull = true
                 publicProperties.isLoading = false
+                
+                transferableItem = getSharableData()
             } catch {
                 print("Audio data not loaded on creation view err is: \(error)")
             }
@@ -313,8 +318,7 @@ struct CreationViewer: View {
         //        .ignoresSafeArea()
         .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
             pdfView.scaleFactor = pdfView.scaleFactorForSizeToFit
-            
-            print("Orientation changed")
+//            print("Orientation changed")
             
         })
     }
@@ -327,7 +331,7 @@ struct CreationViewer: View {
     }
     
     func getSharableData() -> TransferableItem {
-//        print("Sharable....")
+        print("Sharable....")
         //        let nameOfCreationData = Data(receivedAudioImageModel.nameOfCreation.utf8)
         //
         //        let encoder = JSONEncoder()

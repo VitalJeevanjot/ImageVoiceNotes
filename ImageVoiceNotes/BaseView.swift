@@ -192,9 +192,11 @@ struct buttonImageView: View {
         return Group {
             Image(uiImage: img)
                 .resizable()
+                .scaledToFit()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
                 .padding([.trailing], 10)
+//                .aspectRatio(contentMode: .fit)
             
             VStack (alignment: .leading) {
                 HStack {
