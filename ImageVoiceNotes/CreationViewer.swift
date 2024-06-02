@@ -54,7 +54,7 @@ struct CreationViewer: View {
             
             //            let imgToShow = UIImage(data: imgDataReceived)
             if let imgToShow = UIImage(data: publicProperties.pickedImageData) {
-                imageViewerWithZoomEtc(image: imgToShow, view: pdfView)
+                imageViewerWithZoomEtc(image: imgToShow, view: pdfView).ignoresSafeArea()
                     .onTapGesture {
                         showHideUI()
                     }
