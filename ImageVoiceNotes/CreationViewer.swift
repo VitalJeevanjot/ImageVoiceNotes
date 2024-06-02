@@ -380,7 +380,7 @@ struct CreationViewer: View {
         var fileName = receivedAudioImageModel.nameOfCreation
         fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
         let exportsPathURL = dir.appending(path: "Exports")
-        let filePathURL = exportsPathURL.appending(component: "\(fileName).imagesong")
+        let filePathURL = exportsPathURL.appending(component: "\(fileName).mikpic")
         //        print(exportsPathURL.path(percentEncoded: false))
         if fileCreated == false {
             do {

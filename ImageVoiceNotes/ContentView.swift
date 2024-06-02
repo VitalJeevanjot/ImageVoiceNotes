@@ -32,7 +32,7 @@ struct ContentView: View {
                 BaseView(navPath: $navPath)
                     .preferredColorScheme(.light)
                     .onOpenURL(perform: { url in
-                        if url.pathExtension == "imagesong" {
+                        if url.pathExtension == "mikpic" {
 //                            print("url is....")
 //                            print(url)
                             defer {
