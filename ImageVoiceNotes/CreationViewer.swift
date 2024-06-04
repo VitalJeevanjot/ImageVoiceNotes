@@ -45,6 +45,8 @@ struct CreationViewer: View {
     
     let dir =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     
+    @Environment(StatusBarValue.self) private var statusBarVal
+    
     var body: some View {
 //        let _ = print("RENDERING creation viewer......")
         ZStack {
@@ -232,6 +234,7 @@ struct CreationViewer: View {
 //            dissapearingActions()
             fileCreated = false
             showUI = false
+            statusBarVal.statusBarHidden = true
             print("Task")
             print(isDemo)
             sanitizedNameForShareLinkPreview = receivedAudioImageModel.nameOfCreation
@@ -430,6 +433,7 @@ struct CreationViewer: View {
         withAnimation {
             showUI.toggle()
         }
+        statusBarVal.statusBarHidden = !showUI
         autoHideUIWhenNotpaused()
         
     }
@@ -442,6 +446,7 @@ struct CreationViewer: View {
                     withAnimation {
                         showUI = false
                     }
+                    statusBarVal.statusBarHidden = true
                 }
             }
         }

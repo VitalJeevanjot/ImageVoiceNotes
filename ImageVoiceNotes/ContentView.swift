@@ -8,6 +8,12 @@
 import SwiftUI
 import SwiftData
 
+
+@Observable class StatusBarValue {
+    var statusBarHidden = false
+}
+
+
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var creations: [AudioImageModel] // for validating audio/image files in documents with swiftData entities saved.
@@ -21,6 +27,8 @@ struct ContentView: View {
     @State private var navPath: [AudioImageModel] = []
     
     @State private var pathItemToAppend: AudioImageModel?
+    
+    @State private var statusBarVal = StatusBarValue()
 //    @Query private var items: [Item]
     var body: some View {
 //        CreationViewer()
@@ -30,7 +38,9 @@ struct ContentView: View {
             if nowShowView {
                 
                 BaseView(navPath: $navPath)
+                    .environment(statusBarVal)
                     .preferredColorScheme(.light)
+                    .statusBarHidden(statusBarVal.statusBarHidden)
                     .onOpenURL(perform: { url in
                         if url.pathExtension == "picmik" {
 //                            print("url is....")
@@ -82,7 +92,6 @@ struct ContentView: View {
                     })
             }
         }
-        
         .task(priority: .high, {
             for i in creations {
                 if !FileManager.default.fileExists(atPath: direc.appending(path: i.audioPicked).path(percentEncoded: false)) {
