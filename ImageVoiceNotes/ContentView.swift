@@ -112,6 +112,7 @@ struct ContentView: View {
 //                print("PHASE ___ Active!!")
                 if pathItemToAppend != nil {
                     navPath.append(pathItemToAppend!)
+                    pathItemToAppend = nil
                 }
             }
             if newPhase == .inactive {
