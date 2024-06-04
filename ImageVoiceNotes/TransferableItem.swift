@@ -17,7 +17,7 @@ struct TransferableItem: Codable, Transferable {
     }
     
     static var transferRepresentation: some TransferRepresentation {
-        FileRepresentation(contentType: .mikpic) { Transferable in
+        FileRepresentation(contentType: .picmik) { Transferable in
             SentTransferredFile(Transferable.fileToShare)
         } importing: { ReceivedTransferredFile in
             print(">>>>>>>>>Importing<<<<<<<<<")
@@ -54,7 +54,7 @@ struct FileToSaveWith: Codable {
 
 
 extension UTType {
-    static var mikpic: UTType {
-        .init(exportedAs: "com.jeevanjotsinghvital.mikpic")
+    static var picmik: UTType {
+        .init(exportedAs: "com.jeevanjotsinghvital.picmik")
     }
 }

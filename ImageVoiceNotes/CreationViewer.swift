@@ -197,7 +197,7 @@ struct CreationViewer: View {
                             showInfoPopup = false
                         } label: {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.title3)
+                                .font(.title2)
                         }
                 }.padding([.bottom], 15)
                 Group {
@@ -364,7 +364,7 @@ struct CreationViewer: View {
         
         
         //        let imagePickedData = try Data
-        if FileManager.default.fileExists(atPath: dir.appending(path: "Exports").path) {
+        if FileManager.default.fileExists(atPath: dir.appending(path: "Exports").path(percentEncoded: false)) {
             do {
                 try FileManager.default.removeItem(at: dir.appending(path: "Exports"))
             } catch {
@@ -380,11 +380,11 @@ struct CreationViewer: View {
         var fileName = receivedAudioImageModel.nameOfCreation
         fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
         let exportsPathURL = dir.appending(path: "Exports")
-        let filePathURL = exportsPathURL.appending(component: "\(fileName).mikpic")
+        let filePathURL = exportsPathURL.appending(component: "\(fileName).picmik")
         //        print(exportsPathURL.path(percentEncoded: false))
         if fileCreated == false {
             do {
-                if !FileManager.default.fileExists(atPath: exportsPathURL.path) {
+                if !FileManager.default.fileExists(atPath: exportsPathURL.path(percentEncoded: false)) {
                     try FileManager.default.createDirectory(atPath: exportsPathURL.path(percentEncoded: false), withIntermediateDirectories: true)
                 }
             } catch {
@@ -393,7 +393,7 @@ struct CreationViewer: View {
             
             
             do {
-                if FileManager.default.fileExists(atPath: filePathURL.path) {
+                if FileManager.default.fileExists(atPath: filePathURL.path(percentEncoded: false)) {
                     try FileManager.default.removeItem(at: filePathURL)
                 }
             } catch {

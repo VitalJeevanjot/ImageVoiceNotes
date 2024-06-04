@@ -37,6 +37,8 @@ struct BaseView: View {
     
     @Binding var navPath: [AudioImageModel]
     
+    @State private var showDeveloperInfoSheet: Bool = false
+    
 //    init() {
 //        print("Rendering base view.......")
 //    }
@@ -49,6 +51,14 @@ struct BaseView: View {
         NavigationStack(path: $navPath){
             VStack(spacing: 0) {
                 HStack {
+                    Image("applogo")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .padding([.trailing], 10)
+                        .onTapGesture {
+                            showDeveloperInfoSheet = true
+                        }
+                    
                     TextField("Search", text: $searchText)
                         .padding(5)
                         .background(Color(red: 242/255, green: 242/255, blue: 242/255))
@@ -96,6 +106,30 @@ struct BaseView: View {
             
         }
         .tint(.black)
+        
+        .sheet(isPresented: $showDeveloperInfoSheet, content: {
+            VStack(spacing: 5) {
+                Image("applogo")
+                    .resizable()
+                    .frame(width: 200, height: 200)
+                
+                HStack {
+                    Text("PicMik. (Picture Miked)")
+                        .font(.title)
+                }.padding([.bottom], 5)
+                
+                Text("by Jeevanjot Singh Vital")
+                    .font(.title3)
+                Button {
+                    showDeveloperInfoSheet = false
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
+                }
+                .tint(.black)
+                .padding()
+            }
+        })
 //    detail: {
 //        Text("Selected items")
 //    }
@@ -187,7 +221,7 @@ struct buttonImageView: View {
     var body: some View {
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "yyyy/MM/dd hh:mm:ss a"
-        let path: String = fileURl.path
+        let path: String = fileURl.path(percentEncoded: false)
         let img: UIImage = UIImage(named: path)!
         return Group {
             Image(uiImage: img)

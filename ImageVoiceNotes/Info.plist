@@ -6,12 +6,12 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeName</key>
-			<string>Miked Picture</string>
+			<string>Picture Miked</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.jeevanjotsinghvital.mikpic</string>
+				<string>com.jeevanjotsinghvital.picmik</string>
 			</array>
 		</dict>
 	</array>
@@ -26,16 +26,16 @@
 				<string>public.item</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Miked Picture</string>
+			<string>Picture Miked</string>
 			<key>UTTypeIconFiles</key>
 			<array/>
 			<key>UTTypeIdentifier</key>
-			<string>com.jeevanjotsinghvital.mikpic</string>
+			<string>com.jeevanjotsinghvital.picmik</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
-					<string>mikpic</string>
+					<string>picmik</string>
 				</array>
 			</dict>
 		</dict>
