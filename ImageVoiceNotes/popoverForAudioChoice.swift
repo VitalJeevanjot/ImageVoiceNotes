@@ -28,7 +28,7 @@ struct popoverForAudioChoice: View {
                         .clipShape(.rect(cornerRadius: 10))
                         .foregroundStyle(.white)
                 }
-                Text("Record")
+                Text("Select")
                     .font(.caption2)
                     .fontWeight(.bold)
             }
