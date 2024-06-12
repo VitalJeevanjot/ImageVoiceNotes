@@ -69,21 +69,24 @@ struct AudioRecorder: View {
                         await checkForRecordingPermission()
                     }
                 } label: {
-                    Label("Request permission", systemImage: "mic.fill")
-                        .foregroundStyle(.black)
+                    Label("Enable Microphone Permission", systemImage: "mic.fill")
+                        .foregroundStyle(.white)
                 }
+                .tint(.black)
                 .buttonStyle(.borderedProminent)
             }
         }
         .onDisappear {
-            stopRecording()
+            if isRecording {
+                stopRecording()
+            }
             if manualDisappear == false {
                 publicProperties.audioPlayer.stop()
                 publicProperties.isPlaying = false
                 publicProperties.audioFileSelectedAndAdded = false
                 publicProperties.isReadyToPlayFull = false
                 publicProperties.showRecordingUI = false
-                print("Disappeared without stopping audio in AudioRecorder...")
+//                print("Disappeared without stopping audio in AudioRecorder...")
             }
         }
         .task {
@@ -133,6 +136,15 @@ struct AudioRecorder: View {
         } else {
 //            print("false")
             canRecord = false
+            openSettingsURLForPicMik()
+        }
+    }
+    
+    func openSettingsURLForPicMik() {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            DispatchQueue.main.async {
+                UIApplication.shared.open(url)
+            }
         }
     }
     
@@ -175,8 +187,8 @@ struct AudioRecorder: View {
         if isPaused {
             print("Started.......")
             print(audioRecording!.record())
-            print(".......Started.......")
             isRecording = true
+            print(".......Started.......")
             isPaused = false
             print("Started recording")
             updateTiming()
@@ -225,7 +237,7 @@ struct AudioRecorder: View {
     }
     
     func updateTiming() {
-        if isRecording && !isPaused &&             publicProperties.showRecordingUI {
+        if isRecording && !isPaused && publicProperties.showRecordingUI {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
                 currentTime = audioRecording!.currentTime
                 print("Updaing")
