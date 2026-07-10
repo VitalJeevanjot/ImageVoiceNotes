@@ -11,7 +11,7 @@ struct ContentCreationViewer: View {
     @StateObject private var voicedImageModel = ImageProperties()
     @State private var publicProperties = PublicAudioImageProperties.shared
         
-    @Environment (\.dismiss) private var dismiss
+    @Environment(\.dismiss) private var dismiss
     @State private var showBackButtonAlert = false
 
     var demo: Bool
