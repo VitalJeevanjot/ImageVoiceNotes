@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B800A0013010000000000001 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B800A0013010000000000003 /* Localizable.xcstrings */; };
+		B800A0013010000000000002 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B800A0013010000000000004 /* InfoPlist.xcstrings */; };
 		B80DD3072BD9537800A4C38A /* ImageProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD3062BD9537800A4C38A /* ImageProperties.swift */; };
 		B826E0BF2BE9C8E1006273D3 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */; };
 		B82A9EDD2BFAE78A0016890D /* perItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82A9EDC2BFAE78A0016890D /* perItemView.swift */; };
@@ -23,9 +25,8 @@
 		B86C6E572BC9672500B5F991 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E562BC9672500B5F991 /* Item.swift */; };
 		B86C6E592BC9672600B5F991 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86C6E582BC9672600B5F991 /* Assets.xcassets */; };
 		B86C6E5C2BC9672600B5F991 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B86C6E5B2BC9672600B5F991 /* Preview Assets.xcassets */; };
-		B86C6E662BC9672600B5F991 /* ImageVoiceNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E652BC9672600B5F991 /* ImageVoiceNotesTests.swift */; };
-		B86C6E702BC9672600B5F991 /* ImageVoiceNotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E6F2BC9672600B5F991 /* ImageVoiceNotesUITests.swift */; };
-		B86C6E722BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E712BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift */; };
+		B86C6E662BC9672600B5F991 /* PicMikFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E652BC9672600B5F991 /* PicMikFormatTests.swift */; };
+		B86C6E702BC9672600B5F991 /* PicMikLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86C6E6F2BC9672600B5F991 /* PicMikLocalizationTests.swift */; };
 		B86DBE912BDAB6E800C25322 /* ContentCreationViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86DBE902BDAB6E800C25322 /* ContentCreationViewer.swift */; };
 		B8700A452BDB99880055BC38 /* AddNewAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8700A442BDB99880055BC38 /* AddNewAudio.swift */; };
 		B8783EE82BD636A200F9FE55 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783EE72BD636A200F9FE55 /* BaseView.swift */; };
@@ -55,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B800A0013010000000000003 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		B800A0013010000000000004 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B80DD3062BD9537800A4C38A /* ImageProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProperties.swift; sourceTree = "<group>"; };
 		B826E0BE2BE9C8E1006273D3 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B82A9EDC2BFAE78A0016890D /* perItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = perItemView.swift; sourceTree = "<group>"; };
@@ -74,10 +77,9 @@
 		B86C6E582BC9672600B5F991 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B86C6E5B2BC9672600B5F991 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B86C6E612BC9672600B5F991 /* PicMikTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicMikTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B86C6E652BC9672600B5F991 /* ImageVoiceNotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVoiceNotesTests.swift; sourceTree = "<group>"; };
+		B86C6E652BC9672600B5F991 /* PicMikFormatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicMikFormatTests.swift; sourceTree = "<group>"; };
 		B86C6E6B2BC9672600B5F991 /* PicMikUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PicMikUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B86C6E6F2BC9672600B5F991 /* ImageVoiceNotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVoiceNotesUITests.swift; sourceTree = "<group>"; };
-		B86C6E712BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageVoiceNotesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B86C6E6F2BC9672600B5F991 /* PicMikLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicMikLocalizationTests.swift; sourceTree = "<group>"; };
 		B86DBE902BDAB6E800C25322 /* ContentCreationViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCreationViewer.swift; sourceTree = "<group>"; };
 		B8700A442BDB99880055BC38 /* AddNewAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewAudio.swift; sourceTree = "<group>"; };
 		B8783EE72BD636A200F9FE55 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -162,6 +164,8 @@
 				B85FFFA52BDFB69200D95954 /* SwiftData */,
 				B8559EE72BD679F4000A48E0 /* ImageVoiceNotes.entitlements */,
 				B8783EE92BD64CD200F9FE55 /* Info.plist */,
+				B800A0013010000000000004 /* InfoPlist.xcstrings */,
+				B800A0013010000000000003 /* Localizable.xcstrings */,
 				B82DD26F2BF1A0850007F495 /* popoverForAudioChoice.swift */,
 				B86C6E522BC9672500B5F991 /* ImageVoiceNotesApp.swift */,
 				B86C6E542BC9672500B5F991 /* ContentView.swift */,
@@ -196,7 +200,7 @@
 		B86C6E642BC9672600B5F991 /* ImageVoiceNotesTests */ = {
 			isa = PBXGroup;
 			children = (
-				B86C6E652BC9672600B5F991 /* ImageVoiceNotesTests.swift */,
+				B86C6E652BC9672600B5F991 /* PicMikFormatTests.swift */,
 			);
 			path = ImageVoiceNotesTests;
 			sourceTree = "<group>";
@@ -204,8 +208,7 @@
 		B86C6E6E2BC9672600B5F991 /* ImageVoiceNotesUITests */ = {
 			isa = PBXGroup;
 			children = (
-				B86C6E6F2BC9672600B5F991 /* ImageVoiceNotesUITests.swift */,
-				B86C6E712BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift */,
+				B86C6E6F2BC9672600B5F991 /* PicMikLocalizationTests.swift */,
 			);
 			path = ImageVoiceNotesUITests;
 			sourceTree = "<group>";
@@ -296,6 +299,20 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				de,
+				es,
+				fr,
+				hi,
+				it,
+				ja,
+				ko,
+				nl,
+				"pt-BR",
+				ru,
+				tr,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = B86C6E462BC9672500B5F991;
 			productRefGroup = B86C6E502BC9672500B5F991 /* Products */;
@@ -316,6 +333,8 @@
 			files = (
 				B86C6E5C2BC9672600B5F991 /* Preview Assets.xcassets in Resources */,
 				B86C6E592BC9672600B5F991 /* Assets.xcassets in Resources */,
+				B800A0013010000000000001 /* Localizable.xcstrings in Resources */,
+				B800A0013010000000000002 /* InfoPlist.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B86C6E662BC9672600B5F991 /* ImageVoiceNotesTests.swift in Sources */,
+				B86C6E662BC9672600B5F991 /* PicMikFormatTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,8 +397,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B86C6E702BC9672600B5F991 /* ImageVoiceNotesUITests.swift in Sources */,
-				B86C6E722BC9672600B5F991 /* ImageVoiceNotesUITestsLaunchTests.swift in Sources */,
+				B86C6E702BC9672600B5F991 /* PicMikLocalizationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,7 +554,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = PicMik;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The audio will be recorded and stored only if accepted by user locally attached to the image of user's choice in this app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -578,7 +595,6 @@
 				INFOPLIST_KEY_CFBundleDisplayName = PicMik;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "The audio will be recorded and stored only if accepted by user locally attached to the image of user's choice in this app.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -653,7 +669,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ImageVoiceNotes;
+				TEST_TARGET_NAME = PicMik;
 			};
 			name = Debug;
 		};
@@ -670,7 +686,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = ImageVoiceNotes;
+				TEST_TARGET_NAME = PicMik;
 			};
 			name = Release;
 		};

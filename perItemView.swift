@@ -32,7 +32,7 @@ struct perItemView: View {
                     //                                        playStopAudio(picked: item.audioPicked)
                     //                                        print("play/pause")
                 } label: {
-                    Label("Play or pause on main view", systemImage: "xmark.bin.circle.fill")
+                    Label("Delete creation", systemImage: "xmark.bin.circle.fill")
                         .labelStyle(.iconOnly)
                         .font(.system(size: 40))
                 }
@@ -45,7 +45,7 @@ struct perItemView: View {
             .overlay {
                 Capsule().strokeBorder(.brown, lineWidth: 2)
             }
-            .alert("Delete \(item.nameOfCreation) ?",isPresented: $showDeletionAlert, presenting: item) { item in
+            .alert("Delete \(item.nameOfCreation)?",isPresented: $showDeletionAlert, presenting: item) { item in
                 AlertBeforeDeletion(item: item, showDeletionAlert: $showDeletionAlert, direc: direc)
             }
             

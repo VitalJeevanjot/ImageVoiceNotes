@@ -1,0 +1,196 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSMicrophoneUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يستخدم PicMik الميكروفون لتسجيل ملاحظات صوتية لصورك."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik verwendet das Mikrofon, um Sprachnotizen zu deinen Bildern aufzunehmen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik uses the microphone to record voice notes for your pictures."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik usa el micrófono para grabar notas de voz para tus imágenes."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik utilise le microphone pour enregistrer des notes vocales pour vos images."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik आपकी तस्वीरों के लिए वॉइस नोट रिकॉर्ड करने हेतु माइक्रोफ़ोन का उपयोग करता है।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik usa il microfono per registrare note vocali per le tue immagini."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMikは、画像に添えるボイスメモを録音するためにマイクを使用します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik은 사진에 넣을 음성 메모를 녹음하기 위해 마이크를 사용합니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik gebruikt de microfoon om gesproken notities bij je afbeeldingen op te nemen."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O PicMik usa o microfone para gravar notas de voz para suas imagens."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik использует микрофон для записи голосовых заметок к вашим снимкам."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik, görsellerinize sesli not kaydetmek için mikrofonu kullanır."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik 使用麦克风为你的图片录制语音备注。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik 會使用麥克風，讓你為圖片錄製語音備忘錄。"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يستخدم PicMik مكتبة الصور لتتمكن من اختيار صورة لعملك."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik greift auf deine Fotomediathek zu, damit du ein Bild für deine Kreation auswählen kannst."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik uses your photo library so you can choose a picture for your creation."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik accede a tu fototeca para que puedas elegir una imagen para tu creación."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik accède à votre photothèque pour vous permettre de choisir une image pour votre création."
+          }
+        },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik आपकी फ़ोटो लाइब्रेरी का उपयोग करता है ताकि आप अपनी रचना के लिए कोई तस्वीर चुन सकें।"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik accede alla tua libreria foto per consentirti di scegliere un’immagine per la tua creazione."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMikは、作品に使う画像を選べるように写真ライブラリを使用します。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik은 작품에 사용할 사진을 선택할 수 있도록 사진 보관함을 사용합니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik gebruikt je fotobibliotheek zodat je een afbeelding voor je creatie kunt kiezen."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O PicMik usa sua fototeca para que você possa escolher uma imagem para sua criação."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik использует вашу медиатеку, чтобы вы могли выбрать изображение для своей работы."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik, çalışmanız için bir görsel seçebilmeniz amacıyla fotoğraf arşivinizi kullanır."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik 使用你的照片图库，以便你为作品选择图片。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PicMik 會使用你的照片圖庫，讓你為作品選擇圖片。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

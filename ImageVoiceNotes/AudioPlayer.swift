@@ -32,9 +32,9 @@ struct AudioPlayer: View {
                         Text("Audio Time Slider")
                     } minimumValueLabel: {
                         //                            Text("Demo")
-                        Text("\(componentFormatter.string(from: publicProperties.currentTime) ?? "00:00")")
+                        Text(verbatim: componentFormatter.string(from: publicProperties.currentTime) ?? "00:00")
                     } maximumValueLabel: {
-                        Text("\(componentFormatter.string(from: publicProperties.durationTime) ?? "00:00")")
+                        Text(verbatim: componentFormatter.string(from: publicProperties.durationTime) ?? "00:00")
                     } onEditingChanged: {
                         val in
                         publicProperties.currentTime = publicProperties.audioPlayer.currentTime

@@ -88,17 +88,17 @@ struct ContentCreationViewer: View {
                 showBackButtonAlert = false
                 dismiss()
             } label: {
-                Text("yes")
+                Text("Yes")
             }
             Button(role: .cancel) {
                 showBackButtonAlert = false
             } label: {
-                Text("no")
+                Text("No")
             }
         })
         .onDisappear(perform: {
             publicProperties.requiresSave = false
-            publicProperties.textOfCreation = "Untitled"
+            publicProperties.textOfCreation = String(localized: "Untitled")
         })
 
 

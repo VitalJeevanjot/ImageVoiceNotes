@@ -33,7 +33,7 @@ struct AudioRecorder: View {
         return VStack {
             
             if canRecord {
-                Text("\(componentFormatter.string(from: currentTime) ?? "00:00")")
+                Text(verbatim: componentFormatter.string(from: currentTime) ?? "00:00")
                     .padding()
                 
                 HStack {
@@ -53,7 +53,7 @@ struct AudioRecorder: View {
                                 manualDisappear = true
                                 stopRecording()
                             }label: {
-                                Label("Record or Pause", systemImage: "stop.circle.fill")
+                                Label("Stop recording", systemImage: "stop.circle.fill")
                                     .font(.system(size: 40))
                                     .foregroundStyle(.red)
                                     .labelStyle(.iconOnly)
