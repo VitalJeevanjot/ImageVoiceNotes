@@ -47,6 +47,14 @@ struct FileToSaveWith: Codable {
     var createdDate: Date
     var isImported: Bool
     var importedDate: Date
+
+    static func read(from url: URL) throws -> Self {
+        try JSONDecoder().decode(Self.self, from: Data(contentsOf: url))
+    }
+
+    func write(to url: URL) throws {
+        try JSONEncoder().encode(self).write(to: url, options: .atomic)
+    }
 }
 
 

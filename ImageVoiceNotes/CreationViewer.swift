@@ -127,7 +127,7 @@ struct CreationViewer: View {
                             //                fitImage.toggle()
                             //                print("\(fitImage)")
                         } label: {
-                            Label("fit", systemImage: "square.dashed.inset.filled")
+                            Label("Fit image", systemImage: "square.dashed.inset.filled")
                                 .foregroundStyle(.black)
                                 .font(.title)
                                 .labelStyle(.iconOnly)
@@ -186,7 +186,7 @@ struct CreationViewer: View {
             }
         }
         .toolbar(.hidden)
-        .alert("Delete \(receivedAudioImageModel.nameOfCreation) ?",isPresented: $showDeleteAlert, presenting: receivedAudioImageModel) { item in
+        .alert("Delete \(receivedAudioImageModel.nameOfCreation)?",isPresented: $showDeleteAlert, presenting: receivedAudioImageModel) { item in
             AlertBeforeDeletion(item: receivedAudioImageModel, showDeletionAlert: $showDeleteAlert, direc: dir)
         }
         .sheet(isPresented: $showInfoPopup) {
@@ -205,7 +205,7 @@ struct CreationViewer: View {
                 Group {
                     Text("Imported")
                         .fontWeight(.bold)
-                    Text("\(receivedAudioImageModel.isImported)")
+                    Text(receivedAudioImageModel.isImported ? "Yes" : "No")
                         .padding([.bottom], 15)
                 }
 //                    .padding()
@@ -214,7 +214,7 @@ struct CreationViewer: View {
                     Group {
                         Text("Imported Date")
                             .fontWeight(.bold)
-                        Text("\(receivedAudioImageModel.importedDate!)")
+                        Text(receivedAudioImageModel.importedDate!, format: .dateTime)
                             .padding([.bottom], 15)
                     }
                         
@@ -223,7 +223,7 @@ struct CreationViewer: View {
                     Group {
                         Text("Created Date")
                             .fontWeight(.bold)
-                        Text("\(receivedAudioImageModel.createdDate)")
+                        Text(receivedAudioImageModel.createdDate, format: .dateTime)
                             .padding([.bottom], 15)
                     }
                 }
@@ -378,8 +378,6 @@ struct CreationViewer: View {
 //        print("In ShareLINK....")
         let data = FileToSaveWith(nameOfCreation: receivedAudioImageModel.nameOfCreation, imagePickedData: publicProperties.pickedImageData, audioPickedData: publicProperties.pickedAudioData, createdDate: receivedAudioImageModel.createdDate, isImported: true, importedDate: Date.now)
         
-        var dataToWriteToFile: Data
-        
         var fileName = receivedAudioImageModel.nameOfCreation
         fileName.removeAll(where: { !$0.isLetter && !$0.isNumber })
         let exportsPathURL = dir.appending(path: "Exports")
@@ -404,19 +402,10 @@ struct CreationViewer: View {
             }
             
             do {
-                dataToWriteToFile = try JSONEncoder().encode(data)
-//                print("data is.......?>>>")
-//                print(dataToWriteToFile)
-                
-                do {
-                    try dataToWriteToFile.write(to: filePathURL)
-                    fileCreated = true
-                } catch {
-                    print("err on writing data to file for sharelink is: \(error)")
-                }
-                
+                try data.write(to: filePathURL)
+                fileCreated = true
             } catch {
-                print("err on encoding for writing to file for sharelink is: \(error)")
+                print("Error saving .picmik file for sharing: \(error)")
             }
         }
         //        do { // For if Data representation

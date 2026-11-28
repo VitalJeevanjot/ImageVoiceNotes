@@ -31,7 +31,7 @@ import AVFAudio
     var selectedFilePathForAudio = URL(string: "")
     
     var showRecordingUI = false
-    var textOfCreation = "Untitled"
+    var textOfCreation = String(localized: "Untitled")
     
     var requiresSave = false
     

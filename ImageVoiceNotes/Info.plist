@@ -6,6 +6,10 @@
 	<true/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>PicMik uses the microphone to record voice notes for your pictures.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>PicMik uses your photo library so you can choose a picture for your creation.</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>

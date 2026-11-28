@@ -55,37 +55,23 @@ struct ContentView: View {
                             
                             
                             do {
-                                let receivedData = try Data(contentsOf: url)
+                                let jsonReceived = try FileToSaveWith.read(from: url)
+                                let uuidForAudio = UUID().uuidString
+                                let uuidForImage = UUID().uuidString
+                                let dataToSave = AudioImageModel(nameOfCreation: jsonReceived.nameOfCreation, imagePicked: uuidForImage, audioPicked: uuidForAudio, createdDate: Date.now, isImported: true, importedDate: Date.now)
+
+                                SaveFiles(audioData: jsonReceived.audioPickedData, imageData: jsonReceived.imagePickedData, uuidForAudio: uuidForAudio, uuidForImage: uuidForImage)
+
+                                // Use the import date for both fields so the list sorts by when the creation was added.
+                                modelContext.insert(dataToSave)
                                 do {
-                                    let decoder = JSONDecoder()
-                                    let jsonReceived = try decoder.decode(FileToSaveWith.self, from: receivedData)
-//                                    print(jsonReceived)
-                                    
-                                    let audioData = jsonReceived.audioPickedData
-                                    let imageData = jsonReceived.imagePickedData
-                                    let uuidForAudio = UUID().uuidString
-                                    let uuidForImage = UUID().uuidString
-                                    
-                                    let dataToSave : AudioImageModel = AudioImageModel(nameOfCreation: jsonReceived.nameOfCreation, imagePicked: uuidForImage, audioPicked: uuidForAudio, createdDate: Date.now, isImported: true, importedDate: Date.now)
-                                    
-                                    SaveFiles(audioData: audioData, imageData: imageData, uuidForAudio: uuidForAudio, uuidForImage: uuidForImage)
-                                    
-                                    // Imported date same as created date for reasons to keep sorting order correct in base view by date....
-                                    
-                                    modelContext.insert(dataToSave)
-                                    do {
-                                        try modelContext.save()
-                                    } catch {
-                                        print("err while saving imported data to SwiftUI is: \(error)")
-                                    }
-                                    
-                                    pathItemToAppend = dataToSave
-                                    
+                                    try modelContext.save()
                                 } catch {
-                                    print("Err while decoding fetched data from imported file is: \(error)")
+                                    print("err while saving imported data to SwiftUI is: \(error)")
                                 }
+                                pathItemToAppend = dataToSave
                             } catch {
-                                print("Err while fetching data from imported file is: \(error)")
+                                print("Error reading imported .picmik file: \(error)")
                             }
                             
                         }
